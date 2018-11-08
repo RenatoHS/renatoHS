@@ -1,5 +1,5 @@
 +++
-# Recent Publications widget.
+# Publications widget.
 # This widget displays recent publications from `content/publication/`.
 widget = "publications"
 active = true
