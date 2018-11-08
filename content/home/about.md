@@ -24,15 +24,16 @@ weight = 5
 [[education.courses]]
   course = "Msc in Ecology"
   institution = "Université du Québec à Montréal"
-  year = 2010
+  year = 2011
 
 [[education.courses]]
   course = "BSc in Biological Sciences"
   institution = "Universidade Federal de São Carlos"
-  year = 2007
+  year = 2008
  
 +++
 
-# Biography
+# About me
 
-Renato Henriques-Silva is a postdoctoral researcher at Irstea Aix-En-Provence. His interests include macroecology, aquatic ecology, statistics, quantitative methods, data science and programming.
+Hello! I'm Renato.
+I am postdoctoral researcher at Irstea Aix-En-Provence. His interests include macroecology, aquatic ecology, statistics, quantitative methods, data science and programming.
