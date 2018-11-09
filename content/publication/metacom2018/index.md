@@ -1,5 +1,5 @@
 +++
-title = "A comprehensive examination of the network position hypothesis across multiple river metacommunitie"
+title = "A comprehensive examination of the network position hypothesis across multiple river metacommunities"
 date = 2018-05-01T00:00:00
 draft = false
 
