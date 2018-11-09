@@ -9,11 +9,11 @@ weight = 1
 
 # Slide interval.
 # Use `false` to disable animation or enter a time in ms, e.g. `5000` (5s).
-interval = 5000
+interval = 5
 
 # Minimum slide height.
 # Specify a height to ensure a consistent height for each slide.
-height = "300px"
+height = "400px"
 
 # Slides.
 # Duplicate an `[[item]]` block to add more slides.
@@ -42,8 +42,8 @@ height = "300px"
   align = "left"
 
   overlay_color = "#555"  # An HTML color value.
-  overlay_img = ""  # Image path relative to your `static/img/` folder.
-  overlay_filter = 0.5  # Darken the image. Value in range 0-1.
+  overlay_img = "headers/tree.jpg"  # Image path relative to your `static/img/` folder.
+  overlay_filter = 0.3  # Darken the image. Value in range 0-1.
 
 [[item]]
   title = "Right"
@@ -51,7 +51,7 @@ height = "300px"
   align = "right"
 
   overlay_color = "#333"  # An HTML color value.
-  overlay_img = ""  # Image path relative to your `static/img/` folder.
-  overlay_filter = 0.5  # Darken the image. Value in range 0-1.
+  overlay_img = "headers/tree.jpg"  # Image path relative to your `static/img/` folder.
+  overlay_filter = 0.3 # Darken the image. Value in range 0-1.
 
 +++
