@@ -1,6 +1,6 @@
 +++
 title = "Climate, history and life‐history strategies interact in explaining differential macroecological patterns in freshwater zooplankton"
-date = 2018-06-01T00:00:00
+date = 2016-08-01T00:00:00
 draft = false
 
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
