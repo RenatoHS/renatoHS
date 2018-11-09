@@ -55,7 +55,7 @@ url_source = []
 url_custom = []
 
 # Digital Object Identifier (DOI)
-doi = "https://doi.org/10.1111/geb.12505"
+doi = "doi.org/10.1111/geb.12505"
 
 # Does this page contain LaTeX math? (true/false)
 math = true
