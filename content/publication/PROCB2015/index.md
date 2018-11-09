@@ -40,7 +40,7 @@ projects = []
 tags = []
 
 # Links (optional).
-url_pdf = "https://github.com/RenatoHS/renatoHS/blob/master/content/publication/LDG2018/Henriques-Silva%20et%20al.%202018b.pdf"
+url_pdf = "https://github.com/RenatoHS/renatoHS/blob/master/content/publication/PROCB2015/Henriques-Silva%20et%20al.%202015.pdf"
 url_preprint = []
 url_code = []
 url_dataset = [] 
