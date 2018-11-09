@@ -77,7 +77,7 @@ math = true
 # To use, add an image named `featured.jpg/png` to your page's folder. 
 [image]
   # Caption (optional)
-    caption = "Image credit: [**Unsplash**](https://strukturkomunitasplanktondotcom.wordpress.com/2012/04/20/zooplankton/"
+    caption = "Image credit:[**Unsplash**](https://strukturkomunitasplanktondotcom.wordpress.com/2012/04/20/zooplankton/)"
 
   # Focal point (optional)
   # Options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
