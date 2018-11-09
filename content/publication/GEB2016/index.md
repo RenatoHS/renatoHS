@@ -1,10 +1,10 @@
 +++
-title = "Latitudinal-diversity gradients can be shaped by biotic processes: new insigths from an eco-evolutionary model"
+title = "Climate, history and life‐history strategies interact in explaining differential macroecological patterns in freshwater zooplankton"
 date = 2018-06-01T00:00:00
 draft = false
 
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
-authors = ["R Henriques-Silva","A Kubisch","PR Peres-Neto"]
+authors = ["R Henriques-Silva","B Pinel-Alloul","PR Peres-Neto"]
 
 # Publication type.
 # Legend:
@@ -18,11 +18,24 @@ authors = ["R Henriques-Silva","A Kubisch","PR Peres-Neto"]
 publication_types = ["2"]
 
 # Publication name and optional abbreviated version.
-publication = "In *Ecography*"
-publication_short = "In *Ecography*"
+publication = "In *Global Ecology and Biogeography*"
+publication_short = "In *Global Ecology and Biogeography*"
 
 # Abstract and optional shortened version.
-abstract = "The processes involved in shaping latitudinal‐diversity gradients (LDGs) have been a longstanding source of debate and research. Climatic, historical and evolutionary factors have all been shown to contribute to the formation of LDGs. However, meta‐analyses have shown that different clades have LDG slopes that may vary in more than one order of magnitude. Such large variation cannot be explained solely by climatic or historical factors (e.g. difference in surface area between temperate and tropical zones) given that all clades within a geographic region are subject to the same conditions. Therefore, biotic processes intrinsic to each taxonomic group could be relevant in explaining rate differences in diversity decline across latitudinal gradients among groups. In this study, we developed a model simulating multiple competing species subjected (or not) to a demographic Allee effect. We simulated the range expansion of these species across an environmental gradient to show how these two overlooked factors (competition and Allee effects) are capable of modulating LDGs. Allee effects resulted in a steeper LDG given a higher probability of local extinction and lower colonization capacity compared to species without Allee effects. Likewise, stronger competition also led to a steeper decline in species diversity compared to scenarios with weaker species antagonistic interactions. This pattern occurred mostly due to the strength of priority effects, wherein scenarios with strong competition, species that dispersed earlier in the landscape were able to secure many patches whereas late‐arriving species were progressively precluded from expanding their ranges. Overall, our results suggest that the effect of biotic processes in shaping macroecological patterns could be more important than it is currently appreciated."
+abstract = "Aim
+We investigated how freshwater microcrustaceans with different susceptibilities to Allee effects differ in the distribution of their geographical range size (GRS) and diversity along latitudinal gradients, evaluating the importance of climatic and historical factors in explaining these differences. We hypothesized that sexual copepods would have a smaller GRS and that their distribution would be linked to historical processes due to mate‐finding Allee effects during colonization. Given that cyclic parthenogenetic cladocerans avoid these Allee effects, we predicted that they would exhibit a larger GRS and their distribution would be related to climatic factors rather than dispersal limitation.
+
+Location
+Canadian watersheds, North America.
+
+Methods
+We used a database containing the presence–absence of freshwater zooplankton across 1665 Canadian lakes along a latitudinal gradient of 40°. We computed GRS using minimum convex polygons encompassing all lakes in which each species was present. We pooled the diversity of lakes within watersheds, and computed linear regressions models between watershed diversity and average GRS with the average latitude, distance from a glacial refugium and environmental variables of the watershed. All analyses were performed separately for cladocerans and copepods.
+
+Results
+Cladocerans exhibited, on average, a GRS 70% larger than that of copepods. We found a strong relationship between diversity (negative) and average GRS (positive) with latitude for cladocerans but not for copepods. Cladoceran macroecological patterns were mainly explained by climatic factors, whereas the lack of latitudinal gradients in copepods was potentially due to the influence of a northern glacial refuge and dispersal limitation.
+
+Main conclusions
+Our results show that Allee effects are strongly and negatively associated with GRS, influencing the relative importance of environmental filtering and dispersal limitation on species diversity patterns. We suggest that studies should avoid lumping species with large differences in their susceptibility to Allee effects in order to better disentangle the multiple processes affecting large‐scale patterns."
 
 # Is this a selected publication? (true/false)
 selected = false
@@ -40,7 +53,7 @@ projects = []
 tags = []
 
 # Links (optional).
-url_pdf = "https://github.com/RenatoHS/renatoHS/blob/master/content/publication/LDG2018/Henriques-Silva%20et%20al.%202018b.pdf"
+url_pdf = "https://github.com/RenatoHS/renatoHS/blob/master/content/publication/GEB2016/Henriques-Silva%20et%20al.%202016.pdf"
 url_preprint = []
 url_code = []
 url_dataset = [] 
