@@ -1,7 +1,7 @@
 +++
 # Hero Carousel widget.
 widget = "hero_carousel"
-active = false
+active = true
 date = 2017-10-15T00:00:00
 
 # Order that this section will appear in.
@@ -9,7 +9,7 @@ weight = 1
 
 # Slide interval.
 # Use `false` to disable animation or enter a time in ms, e.g. `5000` (5s).
-interval = false
+interval = 5000
 
 # Minimum slide height.
 # Specify a height to ensure a consistent height for each slide.
@@ -25,8 +25,8 @@ height = "300px"
   # Overlay a color or image (optional).
   #   Deactivate an option by commenting out the line, prefixing it with `#`.
   overlay_color = "#666"  # An HTML color value.
-  overlay_img = "headers/bubbles-wide.jpg"  # Image path relative to your `static/img/` folder.
-  overlay_filter = 0.5  # Darken the image. Value in range 0-1.
+  overlay_img = "headers/tree.jpg"  # Image path relative to your `static/img/` folder.
+  overlay_filter = 0.3  # Darken the image. Value in range 0-1.
 
   # Call to action button (optional).
   #   Activate the button by specifying a URL and button label below.
