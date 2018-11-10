@@ -18,7 +18,11 @@ If something takes less time if done through parallel processing, why not do it 
 
 ## Tip 1
 
-...
+```{r}
+plot(1:10,11:20)
+
+```
+
 
 ## Tip 2
 
