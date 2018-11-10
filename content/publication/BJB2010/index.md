@@ -4,7 +4,7 @@ date = 2010-08-01T00:00:00
 draft = false
 
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
-authors = ["I Bianchini-Junior","RH Silva","MB Cunha-Santino","RS Panhota",]
+authors = ["I Bianchini-Junior","RH Silva","MB Cunha-Santino","RS Panhota"]
 
 # Publication type.
 # Legend:
@@ -40,7 +40,7 @@ projects = []
 tags = []
 
 # Links (optional).
-url_pdf = "https://github.com/RenatoHS/renatoHS/blob/master/content/publication/ALB2011/Silva%20et%20al.%202011.pdf"
+url_pdf = "https://github.com/RenatoHS/renatoHS/blob/master/content/publication/BJB2010/Bianchini%20et%20al.%202010.pdf"
 url_preprint = []
 url_code = []
 url_dataset = [] 
