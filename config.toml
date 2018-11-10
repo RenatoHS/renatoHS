@@ -221,7 +221,7 @@ enableGitInfo = false
     #   2 = APA
     #   3 = MLA
     #   4 = Stream
-    publication_format = 0
+    publication_format = 4
 
     # Talk list format.
     #   0 = Simple
