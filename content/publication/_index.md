@@ -12,6 +12,6 @@ list_format = 3
 
 # Optional featured image (relative to `static/img/` folder).
 [header]
-image = "static/image/papers.gif"
+image = "static/img/papers.gif"
 caption = ""
 +++
