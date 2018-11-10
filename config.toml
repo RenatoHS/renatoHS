@@ -261,6 +261,16 @@ enableGitInfo = false
     icon = "github"
     icon_pack = "fab"
     link = "https://github.com/RenatoHS/"
+    
+  [[params.social]]
+    icon = "linkedin"
+    icon_pack = "fab"
+    link = "https://www.linkedin.com/in/renato-henriques-da-silva-27b40463/"
+    
+    [[params.social]]
+    icon = "researchgate"
+    icon_pack = "fab"
+    link = "https://www.researchgate.net/profile/Renato_Henriques-Silva"
 
   # Link to a PDF of your resume/CV from the About widget.
   # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
