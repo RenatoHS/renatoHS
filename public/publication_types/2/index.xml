@@ -1,24 +1,87 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2 on Academic</title>
+    <title>2 on Renato HS</title>
     <link>/publication_types/2/</link>
-    <description>Recent content in 2 on Academic</description>
+    <description>Recent content in 2 on Renato HS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Renato Henriques da Silva 2018</copyright>
-    <lastBuildDate>Tue, 01 Sep 2015 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 01 Jun 2018 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-id/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0200</pubDate>
+      <title>Latitudinal-diversity gradients can be shaped by biotic processes: new insigths from an eco-evolutionary model</title>
+      <link>/publication/ldg2018/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/publication/person-re-id/</guid>
-      <description>More detail can easily be written here using Markdown and $\rm \LaTeX$ math code.</description>
+      <guid>/publication/ldg2018/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A comprehensive examination of the network position hypothesis across multiple river metacommunities</title>
+      <link>/publication/metacom2018/</link>
+      <pubDate>Tue, 01 May 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/publication/metacom2018/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Climate, history and life‐history strategies interact in explaining differential macroecological patterns in freshwater zooplankton</title>
+      <link>/publication/geb2016/</link>
+      <pubDate>Mon, 01 Aug 2016 00:00:00 +0200</pubDate>
+      
+      <guid>/publication/geb2016/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>On the evolution of dispersal via heterogeneity in spatial connectivity</title>
+      <link>/publication/procb2015/</link>
+      <pubDate>Sun, 01 Mar 2015 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/procb2015/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spatiotemporal dynamics in a seasonal metacommunity structure is predictable: the case of floodplain‐fish communities</title>
+      <link>/publication/ecog2014/</link>
+      <pubDate>Wed, 01 Jan 2014 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/ecog2014/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A community of metacommunities: exploring patterns in species distributions across large geographical areas</title>
+      <link>/publication/ecol2013/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/ecol2013/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Aerobic and anaerobic mineralization of Salvinia molesta and Myriophyllum aquaticum leachates from a tropical reservoir (Brazil)</title>
+      <link>/publication/alb2011/</link>
+      <pubDate>Fri, 01 Apr 2011 00:00:00 +0200</pubDate>
+      
+      <guid>/publication/alb2011/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Aerobic and anaerobic decomposition of Pistia stratiotes leachates from a tropical eutrophic reservoir (Barra Bonita, SP, Brazil)</title>
+      <link>/publication/bjb2010/</link>
+      <pubDate>Sun, 01 Aug 2010 00:00:00 +0200</pubDate>
+      
+      <guid>/publication/bjb2010/</guid>
+      <description></description>
     </item>
     
   </channel>

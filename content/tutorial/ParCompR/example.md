@@ -9,7 +9,7 @@ toc = true  # Show table of contents? true/false
 type = "docs"  # Do not modify.
 
 # Add menu entry to sidebar.
-linktitle = "Null Models - Parallel"
+linktitle = "Example Page"
 [menu.tutorial]
   parent = "Example Topic"
   weight = 1
