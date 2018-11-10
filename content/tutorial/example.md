@@ -1,5 +1,5 @@
 +++
-title = "Example Page"
+title = "Null Model - Parallel Computing - SOCK Cluster"
 
 date = 2018-09-09T00:00:00
 # lastmod = 2018-09-09T00:00:00
@@ -13,6 +13,8 @@ linktitle = "Null Models - Parallel"
 [menu.tutorial]
   parent = "Example Topic"
   weight = 1
+  parent = "Example Topic 2"
+  weight = 2
 +++
 
 In this tutorial, I'll share my top 10 tips for getting started with Academic:
