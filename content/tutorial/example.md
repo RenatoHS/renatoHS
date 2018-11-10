@@ -1,5 +1,5 @@
 +++
-title = "Null Model - Parallel Computing - SOCK Cluster"
+title = "Parallel Computing"
 
 date = 2018-09-09T00:00:00
 # lastmod = 2018-09-09T00:00:00
@@ -9,13 +9,12 @@ toc = true  # Show table of contents? true/false
 type = "docs"  # Do not modify.
 
 # Add menu entry to sidebar.
-linktitle = "Null Models - Parallel"
 [menu.tutorial]
-  parent = "Example Topic"
+  parent = "Parallel - 1"
   weight = 1
 +++
 
-In this tutorial, I'll share my top 10 tips for getting started with Academic:
+If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available allowing for parallel computing. Instead of waiting for a long time while a task completes, one can replace the code sequential code with a parallel one, and divide a given task execution time by a factor of 2, 3, 5 or even more depending on the number of cores in your computer.
 
 ## Tip 1
 
