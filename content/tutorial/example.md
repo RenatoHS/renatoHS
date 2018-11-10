@@ -13,8 +13,6 @@ linktitle = "Null Models - Parallel"
 [menu.tutorial]
   parent = "Example Topic"
   weight = 1
-  parent = "Example Topic 2"
-  weight = 2
 +++
 
 In this tutorial, I'll share my top 10 tips for getting started with Academic:
