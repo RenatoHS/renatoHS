@@ -1,5 +1,5 @@
 +++
-title = "Paralel Computing 2"
+title = ""
 
 date = 2018-09-09T00:00:00
 # lastmod = 2018-09-09T00:00:00
@@ -11,6 +11,6 @@ type = "docs"  # Do not modify.
 # Add menu entry to sidebar.
 linktitle = ""
 [menu.tutorial]
-parent = "Tutorial 2"
+parent = "Intro Parallel"
 weight = 1
 +++

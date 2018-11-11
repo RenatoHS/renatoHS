@@ -1,5 +1,5 @@
 ---
-title: "Parallel Computing 2"
+title: "Introduction Parallel Computing"
 output: html_document
 ---
 
