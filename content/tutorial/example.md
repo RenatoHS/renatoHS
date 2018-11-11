@@ -10,7 +10,7 @@ type = "docs"  # Do not modify.
 
 # Add menu entry to sidebar.
 [menu.tutorial]
-  parent = "Parallel - 1"
+  parent = "Tutorial 1"
   weight = 1
 +++
 
