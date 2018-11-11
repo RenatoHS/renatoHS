@@ -12,7 +12,6 @@ type = "docs"  # Do not modify.
 [menu.tutorial]
   name = "Overview"
   weight = 1
-[menu.tutorial_1]
   name = "Tutorial 1"
   weight = 2
 +++
