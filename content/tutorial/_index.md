@@ -12,12 +12,6 @@ type = "docs"  # Do not modify.
 [menu.tutorial]
   name = "Overview"
   weight = 1
-[menu.tutorial]
-  name = "tut_1"
-  weight = 2
-[menu.tutorial]
-  name = "tut_2"
-  weight = 3
 +++
 
 In the <b> Tutorials </b> section my goal is to post various tips and tricks in R programming for ecologists. Please let me know if you have any question about these tutorials.
