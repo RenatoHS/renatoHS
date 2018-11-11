@@ -14,6 +14,7 @@ linktitle = ""
 parent = "Tutorial 2"
 weight = 1
 +++
+------------------
 
 If something takes less time if done through parallel processing, why
 not do it and save time? Computers nowadays have multi core processors
