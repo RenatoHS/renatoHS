@@ -1,12 +1,22 @@
 ---
-title: "example_1"
+title: "Null model"
 output: html_document
-  keep_md: true
 ---
+
+
+draft = false  # Is this a draft? true/false
+toc = true  # Show table of contents? true/false
+type = "docs"  # Do not modify.
+
+# Add menu entry to sidebar.
+linktitle = "Null Models - Parallel"
+[menu.tutorial]
+parent = "Tutorial 2"
+weight = 1
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-plot(cars)
 ```
 
 ## R Markdown
