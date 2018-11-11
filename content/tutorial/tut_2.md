@@ -1,40 +1,44 @@
-+++
-title = "Paralel Computing 2"
+Parallel Computing
+------------------
 
-date = 2018-09-09T00:00:00
-# lastmod = 2018-09-09T00:00:00
+If something takes less time if done through parallel processing, why
+not do it and save time? Computers nowadays have multi core processors
+with sufficient amount of memory available to run parallel processing.
+Instead of waiting a long time for a task to complete, one can divide
+the taks to run in multiple cores and thus obtain outputs much faster.
 
-draft = false  # Is this a draft? true/false
-toc = true  # Show table of contents? true/false
-type = "docs"  # Do not modify.
+Packages
+--------
 
-# Add menu entry to sidebar.
-linktitle = ""
-[menu.tutorial]
-parent = "Tutorial 2"
-weight = 1
-+++
+There are many packages to run parallel processing in R. Here are a few
+examples:
 
-R Markdown
-----------
+-   parallel
+-   snow
+-   doSNOW
+-   doParallel
+-   foreach
 
-This is an R Markdown document. Markdown is a simple formatting syntax
-for authoring HTML, PDF, and MS Word documents. For more details on
-using R Markdown see <http://rmarkdown.rstudio.com>.
+The first thing to do is to set up a parallel cluster
 
-When you click the **Knit** button a document will be generated that
-includes both content as well as the output of any embedded R code
-chunks within the document. You can embed an R code chunk like this:
+    library(doParallel)
 
-    summary(cars)
+    ## Loading required package: foreach
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+    ## Loading required package: iterators
+
+    ## Loading required package: parallel
+
+    #use the "parallel" library to detect the number of cores in your computer
+    nc <- detectCores()
+
+    #set the cluster with nc - 1 (always leave one core free for the machine to run its other processes)
+    cl <- makeCluster(nc - 1)
+    # this will create a SOCK cluster, which can be done in all operating systems
+
+    #if you want to create a FORK cluster (which has better capabilities to manage memory)
+    #cl <- makeCluster(nc-1, type = "FORK")
+    #note that Windows doest not support FORK clusters
 
 Including Plots
 ---------------
