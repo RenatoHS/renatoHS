@@ -1,0 +1,45 @@
+---
+title: "Introduction Parallel Computing"
+output: html_document
+toc: true
+
+---
+
+
+<div id="TOC">
+true
+</div>
+
+<p>If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.</p>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<p>There are many packages to run parallel processing in R. Here are a few examples:</p>
+<ul>
+<li>parallel</li>
+<li>snow</li>
+<li>doSNOW</li>
+<li>doParallel</li>
+<li>foreach</li>
+</ul>
+<p>The first thing to do is to set up a parallel cluster</p>
+<pre class="r"><code>library(doParallel)</code></pre>
+<pre><code>## Loading required package: foreach</code></pre>
+<pre><code>## Loading required package: iterators</code></pre>
+<pre><code>## Loading required package: parallel</code></pre>
+<pre class="r"><code>#use the &quot;parallel&quot; library to detect the number of cores in your computer
+nc &lt;- detectCores()
+
+#set the cluster with nc - 1 (always leave one core free for the machine to run its other processes)
+cl &lt;- makeCluster(nc - 1)
+# this will create a SOCK cluster, which can be done in all operating systems
+
+#if you want to create a FORK cluster (which has better capabilities to manage memory)
+#cl &lt;- makeCluster(nc-1, type = &quot;FORK&quot;)
+#note that Windows doest not support FORK clusters</code></pre>
+</div>
+<div id="including-plots" class="section level2">
+<h2>Including Plots</h2>
+<p>You can also embed plots, for example:</p>
+<p><img src="/tutorial/tut_2_files/figure-html/pressure-1.png" width="672" /></p>
+<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+</div>

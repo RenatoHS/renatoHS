@@ -13,14 +13,42 @@
     
     
     <item>
-      <title>Example Page</title>
-      <link>/tutorial/example/</link>
+      <title></title>
+      <link>/tutorial/tut_2/</link>
       <pubDate>Sun, 09 Sep 2018 00:00:00 +0200</pubDate>
       
-      <guid>/tutorial/example/</guid>
+      <guid>/tutorial/tut_2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Paralel Computing 1</title>
+      <link>/tutorial/tut_1/</link>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/tutorial/tut_1/</guid>
       <description>In this tutorial, I&amp;rsquo;ll share my top 10 tips for getting started with Academic:
 Tip 1 &amp;hellip;
 Tip 2 &amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/tutorial/tut_1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/tut_1/</guid>
+      <description>code{white-space: pre;}pre:not([class]) {background-color: white;}if (window.hljs) {hljs.configure({languages: []});hljs.initHighlightingOnLoad();if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) {window.setTimeout(function() { hljs.initHighlighting(); }, 0);}}h1 {font-size: 34px;}h1.title {font-size: 38px;}h2 {font-size: 30px;}h3 {font-size: 24px;}h4 {font-size: 18px;}h5 {font-size: 16px;}h6 {font-size: 12px;}.</description>
+    </item>
+    
+    <item>
+      <title>Introduction Parallel Computing</title>
+      <link>/tutorial/tut_2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/tut_2/</guid>
+      <description>trueIf something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
+PackagesThere are many packages to run parallel processing in R.</description>
     </item>
     
   </channel>

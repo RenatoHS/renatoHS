@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -17,10 +15,11 @@
   
     
   
-  <meta name="description" content="Quantitative Ecologist">
+  <meta name="description" content="trueIf something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
+PackagesThere are many packages to run parallel processing in R.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/publication_types/">
+  <link rel="alternate" hreflang="en-us" href="/tutorial/tut_2/">
 
   
 
@@ -80,36 +79,38 @@
   
 
   
-  <link rel="alternate" href="/publication_types/index.xml" type="application/rss+xml" title="Renato HS">
-  <link rel="feed" href="/publication_types/index.xml" type="application/rss+xml" title="Renato HS">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Renato HS">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Renato HS">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/publication_types/">
+  <link rel="canonical" href="/tutorial/tut_2/">
 
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Renato HS">
-  <meta property="og:url" content="/publication_types/">
-  <meta property="og:title" content="Publication_types | Renato HS">
-  <meta property="og:description" content="Quantitative Ecologist">
+  <meta property="og:url" content="/tutorial/tut_2/">
+  <meta property="og:title" content="Introduction Parallel Computing | Renato HS">
+  <meta property="og:description" content="trueIf something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
+PackagesThere are many packages to run parallel processing in R.">
   
   
     
   <meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2018-06-01T00:00:00&#43;02:00">
+  
+  
   
 
   
 
   
 
-  <title>Publication_types | Renato HS</title>
+  <title>Introduction Parallel Computing | Renato HS</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -260,7 +261,9 @@
 </nav>
 
 
+<article class="article" itemscope itemtype="http://schema.org/Article">
 
+  
 
 
 
@@ -277,35 +280,272 @@
 
   
   
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Introduction Parallel Computing</h1>
+
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1 itemprop="name">Publication_types</h1>
+
+<div class="article-metadata">
 
   
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Renato Henriques-Silva">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="" itemprop="datePublished">
+    <time datetime="" itemprop="dateModified">
+      Jan 1, 0001
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Renato Henriques-Silva">
+  </span>
+
+  
+
+  
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Introduction%20Parallel%20Computing&amp;url=%2ftutorial%2ftut_2%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2ftutorial%2ftut_2%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2ftutorial%2ftut_2%2f&amp;title=Introduction%20Parallel%20Computing"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2ftutorial%2ftut_2%2f&amp;title=Introduction%20Parallel%20Computing"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Introduction%20Parallel%20Computing&amp;body=%2ftutorial%2ftut_2%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 </div>
 
 
 
-<div class="universal-wrapper">
-  
+  <div class="article-container">
 
-  
-  
-  <div>
-    <h2><a href="/publication_types/2/">2</a></h2>
-    <div class="article-style">
+    <div class="article-style" itemprop="articleBody">
       
-    </div>
-  </div>
-  
 
-  
-
+<div id="TOC">
+true
 </div>
+
+<p>If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.</p>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<p>There are many packages to run parallel processing in R. Here are a few examples:</p>
+<ul>
+<li>parallel</li>
+<li>snow</li>
+<li>doSNOW</li>
+<li>doParallel</li>
+<li>foreach</li>
+</ul>
+<p>The first thing to do is to set up a parallel cluster</p>
+<pre class="r"><code>library(doParallel)</code></pre>
+<pre><code>## Loading required package: foreach</code></pre>
+<pre><code>## Loading required package: iterators</code></pre>
+<pre><code>## Loading required package: parallel</code></pre>
+<pre class="r"><code>#use the &quot;parallel&quot; library to detect the number of cores in your computer
+nc &lt;- detectCores()
+
+#set the cluster with nc - 1 (always leave one core free for the machine to run its other processes)
+cl &lt;- makeCluster(nc - 1)
+# this will create a SOCK cluster, which can be done in all operating systems
+
+#if you want to create a FORK cluster (which has better capabilities to manage memory)
+#cl &lt;- makeCluster(nc-1, type = &quot;FORK&quot;)
+#note that Windows doest not support FORK clusters</code></pre>
+</div>
+<div id="including-plots" class="section level2">
+<h2>Including Plots</h2>
+<p>You can also embed plots, for example:</p>
+<p><img src="/tutorial/tut_2_files/figure-html/pressure-1.png" width="672" /></p>
+<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+</div>
+
+    </div>
+
+    
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/renato.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Renato Henriques-Silva</a></h5>
+    <h6 class="card-subtitle">Quantitative Ecologist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:renatohenriques@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.fr/citations?user=hWKO0NwAAAAJ&amp;hl=fr" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/RenatoHS/" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://www.linkedin.com/in/renato-henriques-da-silva-27b40463/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://www.researchgate.net/profile/Renato_Henriques-Silva" target="_blank" rel="noopener">
+          <i class="fab fa-researchgate"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
 <div class="container">
   <footer class="site-footer">
   
@@ -444,6 +684,4 @@
 
   </body>
 </html>
-
-
 

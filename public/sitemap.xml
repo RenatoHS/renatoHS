@@ -4,7 +4,7 @@
     
     <url>
     
-      <loc>/tutorial/example/</loc>
+      <loc>/tutorial/tut_2/</loc>
       <lastmod>2018-09-09T00:00:00+02:00</lastmod>
     </url>
     
@@ -20,8 +20,8 @@
     
     <url>
     
-      <loc>/privacy/</loc>
-      <lastmod>2018-06-28T00:00:00+02:00</lastmod>
+      <loc>/tutorial/tut_1/</loc>
+      <lastmod>2018-09-09T00:00:00+02:00</lastmod>
     </url>
     
   
@@ -148,6 +148,13 @@
     
     <url>
     
+      <loc>/tutorial/tut_1/</loc>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/publication_types/2/</loc>
       <lastmod>2018-06-01T00:00:00+02:00</lastmod>
       <priority>0</priority>
@@ -186,6 +193,13 @@
       <loc>/tags/demo/</loc>
       <lastmod>2016-04-27T00:00:00+02:00</lastmod>
       <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tutorial/tut_2/</loc>
     </url>
     
   

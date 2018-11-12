@@ -1,6 +1,8 @@
 ---
 title: "Introduction Parallel Computing"
 output: html_document
+toc: true
+
 ---
 
 If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing.  Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
