@@ -15,7 +15,7 @@
   
     
   
-  <meta name="description" content="trueIf something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
+  <meta name="description" content="If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
 PackagesThere are many packages to run parallel processing in R.">
 
   
@@ -94,7 +94,7 @@ PackagesThere are many packages to run parallel processing in R.">
   <meta property="og:site_name" content="Renato HS">
   <meta property="og:url" content="/tutorial/tut_2/">
   <meta property="og:title" content="Introduction Parallel Computing | Renato HS">
-  <meta property="og:description" content="trueIf something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
+  <meta property="og:description" content="If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
 PackagesThere are many packages to run parallel processing in R.">
   
   
@@ -388,9 +388,6 @@ PackagesThere are many packages to run parallel processing in R.">
     <div class="article-style" itemprop="articleBody">
       
 
-<div id="TOC">
-true
-</div>
 
 <p>If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.</p>
 <div id="packages" class="section level2">
@@ -403,21 +400,44 @@ true
 <li>doParallel</li>
 <li>foreach</li>
 </ul>
-<p>The first thing to do is to set up a parallel cluster</p>
-<pre class="r"><code>library(doParallel)</code></pre>
-<pre><code>## Loading required package: foreach</code></pre>
-<pre><code>## Loading required package: iterators</code></pre>
-<pre><code>## Loading required package: parallel</code></pre>
-<pre class="r"><code>#use the &quot;parallel&quot; library to detect the number of cores in your computer
-nc &lt;- detectCores()
+<p>The first thing to do is to set up a parallel cluster. Use the “parallel” library to detect the number of cores in your computer</p>
+<pre class="r"><code>library(parallel)
+nc &lt;- detectCores()</code></pre>
+<p>set the cluster with nc - 1 (always leave one core free for the machine to run its other processes)</p>
+<pre class="r"><code>cl &lt;- makeCluster(nc - 1)</code></pre>
+<p>this will create a SOCK cluster, which can be done in all operating systems if you want to create a FORK cluster (which has better capabilities to manage memory) “cl &lt;- makeCluster(nc-1, type =”FORK“)”&quot; note, however, that Windows does not support FORK clusters</p>
+<p>```</p>
+</div>
+<div id="for-loops-and-foreach" class="section level2">
+<h2>for loops and foreach</h2>
+<p>An intuitive way to perform a parallel process is to use the foreach function which looks like a for loop but operates more as a lapply() function. As a first example we will perform the foreach function in sequential by using %do%</p>
+<pre class="r"><code>library(foreach)
 
-#set the cluster with nc - 1 (always leave one core free for the machine to run its other processes)
-cl &lt;- makeCluster(nc - 1)
-# this will create a SOCK cluster, which can be done in all operating systems
+foreach(i = 1:5) %do% {
+  sqrt(i)
+}</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 1.414214
+## 
+## [[3]]
+## [1] 1.732051
+## 
+## [[4]]
+## [1] 2
+## 
+## [[5]]
+## [1] 2.236068</code></pre>
+<p>In the example above we applied “sqrt” on each “i”. By default, foreach returns the output in a list format. You can combine the results in different ways. For instance if you want a vector output use the following you can add the argument “.combine = c”</p>
+<pre class="r"><code>library(foreach)
 
-#if you want to create a FORK cluster (which has better capabilities to manage memory)
-#cl &lt;- makeCluster(nc-1, type = &quot;FORK&quot;)
-#note that Windows doest not support FORK clusters</code></pre>
+foreach(i = 1:5, .combine = c) %do% {
+  sqrt(i)
+}</code></pre>
+<pre><code>## [1] 1.000000 1.414214 1.732051 2.000000 2.236068</code></pre>
+<p>If the output is a matrix and you want to combine the results by rows, you can use “.combine = rbind”.</p>
 </div>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>
