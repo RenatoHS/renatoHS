@@ -2,12 +2,20 @@
 title: "Introduction Parallel Computing"
 output: html_document
 ---
+<style type="text/css">
+body{ /* Normal  */
+      font-size: 12px;
+  }
+  code.r{ /* Code block */
+    font-size: 12px;
+}
+</style>
 
-If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing.  Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
+If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays havz multi core processors with sufficient amount of memory available to run parallel processing.  Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
 
 ## Packages
 
-<font size="-1"> There are many packages to run parallel processing in R. Here are a few examples:
+There are many packages to run parallel processing in R. Here are a few examples:
 
 * parallel
 * snow
@@ -16,7 +24,7 @@ If something takes less time if done through parallel processing, why not do it 
 * foreach
 
 The first thing to do is to set up a parallel cluster.
-Use the "parallel" library to detect the number of cores in your computer </font>
+Use the "parallel" library to detect the number of cores in your computer
 ```{r}
 library(parallel)
 nc <- detectCores()

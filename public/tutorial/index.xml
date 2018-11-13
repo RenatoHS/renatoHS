@@ -47,8 +47,7 @@ Tip 2 &amp;hellip;</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/tutorial/tut_2/</guid>
-      <description>If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
-PackagesThere are many packages to run parallel processing in R.</description>
+      <description>body{ /* Normal */font-size: 12px;}code.r{ /* Code block */font-size: 12px;}If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays havz multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.</description>
     </item>
     
   </channel>
