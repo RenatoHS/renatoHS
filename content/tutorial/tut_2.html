@@ -1,5 +1,5 @@
 ---
-title: "Introduction Parallel Computing"
+title: "Introduction to Parallel Computing"
 date: 13 November 2018
 output: html_document
 ---
@@ -10,10 +10,6 @@ output: html_document
 body{ /* Normal  */
       font-size: 14px;
   }
-  h1.title {
-  font-size: 30px;
-  color: DarkRed;
-}
 h1 { /* Header 1 */
   font-size: 20px;
   color: DarkGreen;
@@ -22,7 +18,7 @@ h2 { /* Header 2 */
     font-size: 22px;
   color: DarkGreen;
 }
-  code.r{ /* Code block */
+code.r{ /* Code block */
     font-size: 12px;
 }
 pre { /* Code block - determines code spacing between lines */
@@ -40,7 +36,8 @@ pre { /* Code block - determines code spacing between lines */
 <li>doParallel</li>
 <li>foreach</li>
 </ul>
-<p>The first thing to do is to set up a parallel cluster. Use the “parallel” library to detect the number of cores in your computer</p>
+<p>First install packages `r&lt;install.packages(“parallel”)&gt;’</p>
+<p>Then set up a parallel cluster. Use the “parallel” library to detect the number of cores in your computer</p>
 <pre class="r"><code>library(parallel)
 nc &lt;- detectCores()</code></pre>
 <p>Set the cluster with nc - 1 (always leave one core free for the machine to run its other processes)</p>
@@ -51,7 +48,6 @@ nc &lt;- detectCores()</code></pre>
 <h2>for loops and foreach</h2>
 <p>An intuitive way to perform a parallel process is to use the foreach function which looks like a for loop but operates more as a lapply() function. As a first example we will perform the foreach function in sequential by using %do%</p>
 <pre class="r"><code>library(foreach)
-
 foreach(i = 1:5) %do% {
   sqrt(i)
 }</code></pre>
@@ -70,9 +66,7 @@ foreach(i = 1:5) %do% {
 ## [[5]]
 ## [1] 2.236068</code></pre>
 <p>In the example above we applied “sqrt” on each “i”. By default, foreach returns the output in a list format. You can combine the results in different ways. For instance if you want a vector output use the following you can add the argument “.combine = c”</p>
-<pre class="r"><code>library(foreach)
-
-foreach(i = 1:5, .combine = c) %do% {
+<pre class="r"><code>foreach(i = 1:5, .combine = c) %do% {
   sqrt(i)
 }</code></pre>
 <pre><code>## [1] 1.000000 1.414214 1.732051 2.000000 2.236068</code></pre>

@@ -1,5 +1,5 @@
 ---
-title: "Introduction Parallel Computing"
+title: "Introduction to Parallel Computing"
 date: 13 November 2018
 output: html_document
 ---
@@ -7,10 +7,6 @@ output: html_document
 body{ /* Normal  */
       font-size: 14px;
   }
-  h1.title {
-  font-size: 30px;
-  color: DarkRed;
-}
 h1 { /* Header 1 */
   font-size: 20px;
   color: DarkGreen;
@@ -19,7 +15,7 @@ h2 { /* Header 2 */
     font-size: 22px;
   color: DarkGreen;
 }
-  code.r{ /* Code block */
+code.r{ /* Code block */
     font-size: 12px;
 }
 pre { /* Code block - determines code spacing between lines */
@@ -40,7 +36,11 @@ There are many packages to run parallel processing in R. Here are a few examples
 * doParallel
 * foreach
 
-The first thing to do is to set up a parallel cluster.
+
+
+First install packages `r<install.packages("parallel")>'
+
+Then set up a parallel cluster.
 Use the "parallel" library to detect the number of cores in your computer
 ```{r}
 library(parallel)
@@ -61,7 +61,6 @@ An intuitive way to perform a parallel process is to use the foreach function wh
 
 ```{r}
 library(foreach)
-
 foreach(i = 1:5) %do% {
   sqrt(i)
 }
@@ -70,8 +69,6 @@ foreach(i = 1:5) %do% {
 In the example above we applied "sqrt" on each "i". 
 By default, foreach returns the output in a list format. You can combine the results in different ways. For instance if you want a vector output use the following you can add the argument ".combine = c" 
 ```{r}
-library(foreach)
-
 foreach(i = 1:5, .combine = c) %do% {
   sqrt(i)
 }
