@@ -7,7 +7,7 @@ If something takes less time if done through parallel processing, why not do it 
 
 ## Packages
 
-There are many packages to run parallel processing in R. Here are a few examples:
+<font size="-1"> There are many packages to run parallel processing in R. Here are a few examples:
 
 * parallel
 * snow
@@ -16,7 +16,7 @@ There are many packages to run parallel processing in R. Here are a few examples
 * foreach
 
 The first thing to do is to set up a parallel cluster.
-Use the "parallel" library to detect the number of cores in your computer
+Use the "parallel" library to detect the number of cores in your computer </font>
 ```{r}
 library(parallel)
 nc <- detectCores()
