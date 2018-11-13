@@ -1,11 +1,24 @@
 ---
 title: "Introduction Parallel Computing"
+date: 13 November 2018
 output: html_document
 ---
 <style type="text/css">
 body{ /* Normal  */
-      font-size: 12px;
+      font-size: 14px;
   }
+  h1.title {
+  font-size: 30px;
+  color: DarkRed;
+}
+h1 { /* Header 1 */
+  font-size: 20px;
+  color: DarkGreen;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+  color: DarkGreen;
+}
   code.r{ /* Code block */
     font-size: 12px;
 }
@@ -17,7 +30,7 @@ pre { /* Code block - determines code spacing between lines */
 Why use parallel processing? The simple answer is time.
 If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
 
-## Packages
+## R packages
 
 There are many packages to run parallel processing in R. Here are a few examples:
 
@@ -33,16 +46,14 @@ Use the "parallel" library to detect the number of cores in your computer
 library(parallel)
 nc <- detectCores()
 ```
-set the cluster with nc - 1 (always leave one core free for the machine to run its other processes)
+Set the cluster with nc - 1 (always leave one core free for the machine to run its other processes)
 ```{r}
 cl <- makeCluster(nc - 1)
 ```
-this will create a SOCK cluster, which can be done in all operating systems
-if you want to create a FORK cluster (which has better capabilities to manage memory)
-"cl <- makeCluster(nc-1, type = "FORK")""
+This will create a SOCK cluster, which can be done in all operating systems.
+If you want to create a FORK cluster (which has better capabilities to manage memory)
+"cl <- makeCluster(nc-1, type = "FORK")"
 note, however, that Windows does not support FORK clusters
-
-```
 
 ## for loops and foreach
 

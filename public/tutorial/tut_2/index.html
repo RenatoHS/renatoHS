@@ -15,7 +15,7 @@
   
     
   
-  <meta name="description" content="body{ /* Normal */font-size: 12px;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 14px;}Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.">
+  <meta name="description" content="body{ /* Normal */font-size: 14px;}h1.title {font-size: 30px;color: DarkRed;}h1 { /* Header 1 */font-size: 20px;color: DarkGreen;}h2 { /* Header 2 */font-size: 22px;color: DarkGreen;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 14px;}Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it?">
 
   
   <link rel="alternate" hreflang="en-us" href="/tutorial/tut_2/">
@@ -93,7 +93,7 @@
   <meta property="og:site_name" content="Renato HS">
   <meta property="og:url" content="/tutorial/tut_2/">
   <meta property="og:title" content="Introduction Parallel Computing | Renato HS">
-  <meta property="og:description" content="body{ /* Normal */font-size: 12px;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 14px;}Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.">
+  <meta property="og:description" content="body{ /* Normal */font-size: 14px;}h1.title {font-size: 30px;color: DarkRed;}h1 { /* Header 1 */font-size: 20px;color: DarkGreen;}h2 { /* Header 2 */font-size: 22px;color: DarkGreen;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 14px;}Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it?">
   
   
     
@@ -389,8 +389,20 @@
 
 <style type="text/css">
 body{ /* Normal  */
-      font-size: 12px;
+      font-size: 14px;
   }
+  h1.title {
+  font-size: 30px;
+  color: DarkRed;
+}
+h1 { /* Header 1 */
+  font-size: 20px;
+  color: DarkGreen;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+  color: DarkGreen;
+}
   code.r{ /* Code block */
     font-size: 12px;
 }
@@ -399,8 +411,8 @@ pre { /* Code block - determines code spacing between lines */
 }
 </style>
 <p>Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.</p>
-<div id="packages" class="section level2">
-<h2>Packages</h2>
+<div id="r-packages" class="section level2">
+<h2>R packages</h2>
 <p>There are many packages to run parallel processing in R. Here are a few examples:</p>
 <ul>
 <li>parallel</li>
@@ -412,10 +424,9 @@ pre { /* Code block - determines code spacing between lines */
 <p>The first thing to do is to set up a parallel cluster. Use the “parallel” library to detect the number of cores in your computer</p>
 <pre class="r"><code>library(parallel)
 nc &lt;- detectCores()</code></pre>
-<p>set the cluster with nc - 1 (always leave one core free for the machine to run its other processes)</p>
+<p>Set the cluster with nc - 1 (always leave one core free for the machine to run its other processes)</p>
 <pre class="r"><code>cl &lt;- makeCluster(nc - 1)</code></pre>
-<p>this will create a SOCK cluster, which can be done in all operating systems if you want to create a FORK cluster (which has better capabilities to manage memory) “cl &lt;- makeCluster(nc-1, type =”FORK“)”&quot; note, however, that Windows does not support FORK clusters</p>
-<p>```</p>
+<p>This will create a SOCK cluster, which can be done in all operating systems. If you want to create a FORK cluster (which has better capabilities to manage memory) “cl &lt;- makeCluster(nc-1, type =”FORK“)” note, however, that Windows does not support FORK clusters</p>
 </div>
 <div id="for-loops-and-foreach" class="section level2">
 <h2>for loops and foreach</h2>
