@@ -9,9 +9,13 @@ body{ /* Normal  */
   code.r{ /* Code block */
     font-size: 12px;
 }
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
 </style>
 
-If something takes less time if done through parallel processing, why not do it and save time? Computers nowadays havz multi core processors with sufficient amount of memory available to run parallel processing.  Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
+Why use parallel processing? The simple answer is time.
+If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
 
 ## Packages
 
