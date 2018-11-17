@@ -38,7 +38,7 @@ There are many packages to run parallel processing in R. Here are a few examples
 
 
 
-First install packages `r install.packages("parallel")'
+First install packages `install.packages("doParallel")`. The <i>doParallel</i> library installs both <i>parallel</i> and <i>foreach</i> packages.
 
 Then set up a parallel cluster.
 Use the function detectCores() from the <i>parallel</i> library to detect the number of cores in your computer.
