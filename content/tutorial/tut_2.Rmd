@@ -41,22 +41,21 @@ There are many packages to run parallel processing in R. Here are a few examples
 First install packages `r install.packages("parallel")'
 
 Then set up a parallel cluster.
-Use the function "detectCores" from the <i>parallel</i> library to detect the number of cores in your computer
+Use the function "detectCores" from the <i>parallel</i> library to detect the number of cores in your computer.
 It is always recommended to leave one core for free for the computer to run its other processes.
 In this example, for simplicity, we will use 2 cores.
 ```{r}
 library(doParallel)
-nc <- detectCores()
+detectCores()
 cl <- makeCluster(2)
 ```
 This will create a SOCK cluster, which can be done in all operating systems.
-If you want to create a FORK cluster (which has better capabilities to manage memory)
-"cl <- makeCluster(nc-1, type = "FORK")"
-note, however, that Windows does not support FORK clusters
+If you want to create a FORK cluster (which has better capabilities to manage memory) use --> cl <- makeCluster(nc-1, type = 'FORK').
+Note, however, that Windows does not support FORK clusters
 
 # for loops and foreach
 
-An intuitive way to perform a parallel process is to use the foreach function which looks like a for loop but operates as a lapply() function. As a first example we will perform the foreach function in sequential by using %do%
+An intuitive way to perform a parallel process is to use the foreach function which looks like a for loop but operates as a lapply() function. As a first example we will perform the foreach function in sequential mode by using %do%
 
 ```{r}
 library(foreach)
@@ -66,7 +65,7 @@ foreach(i = 1:6) %do% {
 
 ```
 In the example above we applied "sqrt" on each "i". 
-By default, foreach returns the output in a list format. You can combine the results in different ways. For instance if you want a vector output use the following you can add the argument ".combine = c" 
+By default, foreach returns the output in a list format. You can combine the results in different ways. For instance if you want a vector output use the following you can add the argument ".combine = c". 
 ```{r}
 foreach(i = 1:6, .combine = c) %do% {
   sqrt(i)
@@ -74,7 +73,7 @@ foreach(i = 1:6, .combine = c) %do% {
 
 ```
 If you want to use the foreach in parallel mode, you need to change %do% to %dopar%.
-You also need to register the parallel backbend. Here we use the doParallel package to do this
+You also need to register the parallel backbend. Here we use the <i>doParallel</i> package to do this
 ```{r}
 registerDoParallel(cl)
 
@@ -105,9 +104,9 @@ foreach(i = 1:6, .combine = c) %dopar% {
 }
 
 ```
-If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster. This can be done by the argument ".package" in the foreach function or by using the ClusterEvalQ function as follows.
+If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster. This can be done by the argument ".package" in the foreach function or by using the ClusterEvalQ function.
 
-Let's use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Time. 
+Let's use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Diet. 
 We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to apply the lm function to each chick in the dataset. If the output is a matrix and you want to combine the results by rows, you can use ".combine = rbind".
 ```{r}
 data("ChickWeight")
@@ -125,7 +124,7 @@ new_data<- foreach(i = 1:numb_chicks, .combine = rbind, .packages = "dplyr") %do
 head(new_data)
 
 ```
-In this example, the combine = .rbind parameter will combine the matrices "temp_data" rowise into the "new_data" output. 
+In this example, the combine = .rbind parameter will combine the matrices "temp_data" into the "new_data" output. 
 
 
 
