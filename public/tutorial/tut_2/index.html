@@ -418,7 +418,7 @@ pre { /* Code block - determines code spacing between lines */
 <li>foreach</li>
 </ul>
 <p>First install packages `r install.packages(“parallel”)’</p>
-<p>Then set up a parallel cluster. Use the function “detectCores” from the <i>parallel<i/> library to detect the number of cores in your computer It is always recommended to leave one core for free for the computer to run its other processes. In this example, for simplicity, we will use 2 cores.</p>
+<p>Then set up a parallel cluster. Use the function “detectCores” from the <i>parallel</i> library to detect the number of cores in your computer It is always recommended to leave one core for free for the computer to run its other processes. In this example, for simplicity, we will use 2 cores.</p>
 <pre class="r"><code>library(doParallel)</code></pre>
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
@@ -502,7 +502,17 @@ new_data&lt;- foreach(i = 1:numb_chicks, .combine = rbind, .packages = &quot;dpl
   
   temp_data &lt;- ChickWeight %&gt;% filter(Chick == i) %&gt;% mutate(Growth = lm(weight ~ Time)$coeff[2])
   
-}</code></pre>
+}
+
+head(new_data)</code></pre>
+<pre><code>##   weight Time Chick Diet   Growth
+## 1     42    0     1    1 7.987899
+## 2     51    2     1    1 7.987899
+## 3     59    4     1    1 7.987899
+## 4     64    6     1    1 7.987899
+## 5     76    8     1    1 7.987899
+## 6     93   10     1    1 7.987899</code></pre>
+<p>In this example, the combine = .rbind parameter will combine the matrices “temp_data” rowise into the “new_data” output.</p>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>
 <p>You can also embed plots, for example:</p>
