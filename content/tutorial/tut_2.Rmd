@@ -41,7 +41,7 @@ There are many packages to run parallel processing in R. Here are a few examples
 First install packages `r install.packages("parallel")'
 
 Then set up a parallel cluster.
-Use the function "detectCores" from the <i>parallel</i> library to detect the number of cores in your computer.
+Use the function detectCores() from the <i>parallel</i> library to detect the number of cores in your computer.
 It is always recommended to leave one core for free for the computer to run its other processes.
 In this example, for simplicity, we will use 2 cores.
 ```{r}
@@ -51,7 +51,7 @@ cl <- makeCluster(2)
 ```
 This will create a SOCK cluster, which can be done in all operating systems.
 If you want to create a FORK cluster (which has better capabilities to manage memory) use: 
-cl <- makeCluster(nc-1, type = 'FORK')
+`cl <- makeCluster(nc-1, type = 'FORK')`
 Note, however, that Windows does not support FORK clusters.
 
 # foreach loops
@@ -65,7 +65,7 @@ foreach(i = 1:6) %do% {
 }
 
 ```
-In the example above we applied "sqrt" on each "i". 
+In the example above we applied `sqrt()` on each "i". 
 By default, foreach returns the output in a list format. You can combine the results in different ways. For instance if you want a vector output use the following you can add the argument ".combine = c". 
 ```{r}
 foreach(i = 1:6, .combine = c) %do% {
@@ -83,11 +83,11 @@ foreach(i = 1:6, .combine = c) %dopar% {
 }
 
 ```
-If you want to use a variable or object from the global environment in the parallel cluster, you first need to export it either using the clusterExport function, or using the .export argument in the foreach function
+If you want to use a variable or object from the global environment in the parallel cluster, you first need to export it either using the `clusterExport` function, or using the .export argument in the foreach function
 ```{r}
 var1 <-10
 var2 <-5
-clusterExport(cl, c("var1","var2"))
+#clusterExport(cl, c("var1","var2"))
 
 foreach(i = 1:6, .combine = c, .export = c("var1","var2")) %dopar% {
   (var1+var2)*i
@@ -105,10 +105,10 @@ foreach(i = 1:6, .combine = c) %dopar% {
 }
 
 ```
-If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster. This can be done by the argument ".package" in the foreach function or by using the ClusterEvalQ function.
+If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster. This can be done by the argument ".package" in the foreach function or by using the `ClusterEvalQ` function.
 
 Let's use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Diet. 
-We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to apply the lm function to each chick in the dataset. If the output is a matrix and you want to combine the results by rows, you can use ".combine = rbind".
+We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to apply the `lm` function to each chick in the dataset. If the output is a matrix and you want to combine the results by rows, you can use ".combine = rbind".
 ```{r}
 data("ChickWeight")
 clusterEvalQ(cl,library("dplyr"))

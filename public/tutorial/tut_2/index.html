@@ -418,7 +418,7 @@ pre { /* Code block - determines code spacing between lines */
 <li>foreach</li>
 </ul>
 <p>First install packages `r install.packages(“parallel”)’</p>
-<p>Then set up a parallel cluster. Use the function “detectCores” from the <i>parallel</i> library to detect the number of cores in your computer. It is always recommended to leave one core for free for the computer to run its other processes. In this example, for simplicity, we will use 2 cores.</p>
+<p>Then set up a parallel cluster. Use the function detectCores() from the <i>parallel</i> library to detect the number of cores in your computer. It is always recommended to leave one core for free for the computer to run its other processes. In this example, for simplicity, we will use 2 cores.</p>
 <pre class="r"><code>library(doParallel)</code></pre>
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
@@ -426,10 +426,10 @@ pre { /* Code block - determines code spacing between lines */
 <pre class="r"><code>detectCores()</code></pre>
 <pre><code>## [1] 4</code></pre>
 <pre class="r"><code>cl &lt;- makeCluster(2)</code></pre>
-<p>This will create a SOCK cluster, which can be done in all operating systems. If you want to create a FORK cluster (which has better capabilities to manage memory) use –&gt; cl &lt;- makeCluster(nc-1, type = ‘FORK’). Note, however, that Windows does not support FORK clusters</p>
+<p>This will create a SOCK cluster, which can be done in all operating systems. If you want to create a FORK cluster (which has better capabilities to manage memory) use: <code>cl &lt;- makeCluster(nc-1, type = 'FORK')</code> Note, however, that Windows does not support FORK clusters.</p>
 </div>
-<div id="for-loops-and-foreach" class="section level1">
-<h1>for loops and foreach</h1>
+<div id="foreach-loops" class="section level1">
+<h1>foreach loops</h1>
 <p>An intuitive way to perform a parallel process is to use the foreach function which looks like a for loop but operates as a lapply() function. As a first example we will perform the foreach function in sequential mode by using %do%</p>
 <pre class="r"><code>library(foreach)
 foreach(i = 1:6) %do% {
@@ -452,7 +452,7 @@ foreach(i = 1:6) %do% {
 ## 
 ## [[6]]
 ## [1] 2.44949</code></pre>
-<p>In the example above we applied “sqrt” on each “i”. By default, foreach returns the output in a list format. You can combine the results in different ways. For instance if you want a vector output use the following you can add the argument “.combine = c”.</p>
+<p>In the example above we applied <code>sqrt()</code> on each “i”. By default, foreach returns the output in a list format. You can combine the results in different ways. For instance if you want a vector output use the following you can add the argument “.combine = c”.</p>
 <pre class="r"><code>foreach(i = 1:6, .combine = c) %do% {
   sqrt(i)
 }</code></pre>
@@ -464,10 +464,10 @@ foreach(i = 1:6, .combine = c) %dopar% {
   sqrt(i)
 }</code></pre>
 <pre><code>## [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490</code></pre>
-<p>If you want to use a variable or object from the global environment in the parallel cluster, you first need to export it either using the clusterExport function, or using the .export argument in the foreach function</p>
+<p>If you want to use a variable or object from the global environment in the parallel cluster, you first need to export it either using the <code>clusterExport</code> function, or using the .export argument in the foreach function</p>
 <pre class="r"><code>var1 &lt;-10
 var2 &lt;-5
-clusterExport(cl, c(&quot;var1&quot;,&quot;var2&quot;))
+#clusterExport(cl, c(&quot;var1&quot;,&quot;var2&quot;))
 
 foreach(i = 1:6, .combine = c, .export = c(&quot;var1&quot;,&quot;var2&quot;)) %dopar% {
   (var1+var2)*i
@@ -484,8 +484,8 @@ foreach(i = 1:6, .combine = c) %dopar% {
   is_even((var1+var2)*i)
 }</code></pre>
 <pre><code>## [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
-<p>If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster. This can be done by the argument “.package” in the foreach function or by using the ClusterEvalQ function.</p>
-<p>Let’s use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Diet. We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to apply the lm function to each chick in the dataset. If the output is a matrix and you want to combine the results by rows, you can use “.combine = rbind”.</p>
+<p>If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster. This can be done by the argument “.package” in the foreach function or by using the <code>ClusterEvalQ</code> function.</p>
+<p>Let’s use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Diet. We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to apply the <code>lm</code> function to each chick in the dataset. If the output is a matrix and you want to combine the results by rows, you can use “.combine = rbind”.</p>
 <pre class="r"><code>data(&quot;ChickWeight&quot;)
 clusterEvalQ(cl,library(&quot;dplyr&quot;))</code></pre>
 <pre><code>## [[1]]
