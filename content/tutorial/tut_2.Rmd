@@ -50,10 +50,11 @@ detectCores()
 cl <- makeCluster(2)
 ```
 This will create a SOCK cluster, which can be done in all operating systems.
-If you want to create a FORK cluster (which has better capabilities to manage memory) use --> cl <- makeCluster(nc-1, type = 'FORK').
-Note, however, that Windows does not support FORK clusters
+If you want to create a FORK cluster (which has better capabilities to manage memory) use: 
+cl <- makeCluster(nc-1, type = 'FORK')
+Note, however, that Windows does not support FORK clusters.
 
-# for loops and foreach
+# foreach loops
 
 An intuitive way to perform a parallel process is to use the foreach function which looks like a for loop but operates as a lapply() function. As a first example we will perform the foreach function in sequential mode by using %do%
 
