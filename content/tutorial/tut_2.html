@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Parallel Computing"
-date: 13 November 2018
+date: Nov 18, 2018
 output: html_document
 ---
 
@@ -37,7 +37,7 @@ pre { /* Code block - determines code spacing between lines */
 <li>foreach</li>
 </ul>
 <p>First install packages <code>install.packages(&quot;doParallel&quot;)</code>. The <i>doParallel</i> library installs both <i>parallel</i> and <i>foreach</i> packages.</p>
-<p>Then set up a parallel cluster. Use the function detectCores() from the <i>parallel</i> library to detect the number of cores in your computer. It is always recommended to leave one core for free for the computer to run its other processes. In this example, for simplicity, we will use 2 cores.</p>
+<p>Then set up a parallel cluster. Use the function <code>detectCores</code> from the <i>parallel</i> library to detect the number of cores in your computer. It is always recommended to leave one core for free for the computer to run its other processes. In this example, for simplicity, we will use 2 cores.</p>
 <pre class="r"><code>library(doParallel)</code></pre>
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
@@ -71,7 +71,7 @@ foreach(i = 1:6) %do% {
 ## 
 ## [[6]]
 ## [1] 2.44949</code></pre>
-<p>In the example above we applied <code>sqrt()</code> on each “i”. By default, foreach returns the output in a list format. You can combine the results in different ways. For instance if you want a vector output use the following you can add the argument “.combine = c”.</p>
+<p>In the example above we applied <code>sqrt()</code> on each “i”. By default, foreach returns the output in a list format. You can combine the results in different ways. For instance if you want a vector output you can add the argument “.combine = c”.</p>
 <pre class="r"><code>foreach(i = 1:6, .combine = c) %do% {
   sqrt(i)
 }</code></pre>
