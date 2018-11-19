@@ -24,7 +24,8 @@ pre { /* Code block - determines code spacing between lines */
 </style>
 
 The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. 
-I thus assume that you already know what a null model is. :smile:
+I thus assume that you already know what a null model is. :)
+Otherwise, there is an excellent book on the subject that is freely available to download at [Gotelli and Graves 1996](https://www.uvm.edu/~ngotelli/nullmodelspage.html)
 
 Why use parallel processing? The simple answer is time.
 If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster. 
@@ -45,18 +46,18 @@ There are many packages to run parallel processing in R. Here are a few examples
 
 
 
-First install packages `install.packages("doParallel")`. The <i>doParallel</i> library installs both <i>parallel</i> and <i>foreach</i> packages.
+First install packages `install.packages("doParallel")`. The _doParallel_ library installs both _parallel_ and _foreach_ packages.
 
 Then set up a parallel cluster.
-Use the function `detectCores` from the <i>parallel</i> library to detect the number of cores in your computer.
+Use the function `detectCores` from the _parallel_ library to detect the number of cores in your computer.
 It is always recommended to leave one core free for the computer to run other processes.
 For simplicity we will use 2 cores in this example.
-```{r}
+```{r, echo=FALSE}
 library(doParallel)
 detectCores()
 cl <- makeCluster(2, type = 'PSOCK')
 ```
-This will create a <i>Parallel Socket Cluster</i> (PSOCK), which can be done in all operating systems. However, it only starts with the base packages and thus you need to export variables, functions and packages to the cluster (see further below) if you need them in your parallel code.
+This will create a _Parallel Socket Cluster_ (PSOCK), which can be done in all operating systems. However, it only starts with the base packages and thus you need to export variables, functions and packages to the cluster (see further below) if you need them in your parallel code.
 
 You can also create a FORK cluster, which has better capabilities to manage memory and already contain all the variables from the local environment (i.e., no need for export) since all the cores share the same memory. For this, use: 
 `cl <- makeCluster(2, type = 'FORK')` 
