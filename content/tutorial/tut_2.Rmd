@@ -23,8 +23,15 @@ pre { /* Code block - determines code spacing between lines */
 }
 </style>
 
+The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. 
+I thus assume that you already know what a null model is. :smile:
+
 Why use parallel processing? The simple answer is time.
-If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.
+If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster. 
+
+Before deciding to parallelize your code, remember that there is a trade-off between performance and simplicity. It takes some time to set up the parallel cluster so if your code already runs fast it is not worth it. If your code repeats a similar task over and over (e.g., bootstraping) then it is recommended to parallize to  improve performance. Hence, parallel computing is ideal for null models.
+
+While there are many good tutorials on parallel computing in R out there, I think it is better to provide a small introduction on how to set up a parallel cluster and how to start coding in parallel before jumping on the null models.
 
 # R packages
 
@@ -42,16 +49,18 @@ First install packages `install.packages("doParallel")`. The <i>doParallel</i> l
 
 Then set up a parallel cluster.
 Use the function `detectCores` from the <i>parallel</i> library to detect the number of cores in your computer.
-It is always recommended to leave one core for free for the computer to run its other processes.
-In this example, for simplicity, we will use 2 cores.
+It is always recommended to leave one core free for the computer to run other processes.
+For simplicity we will use 2 cores in this example.
 ```{r}
 library(doParallel)
 detectCores()
-cl <- makeCluster(2)
+cl <- makeCluster(2, type = 'PSOCK')
 ```
-This will create a SOCK cluster, which can be done in all operating systems.
-If you want to create a FORK cluster (which has better capabilities to manage memory) use: 
-`cl <- makeCluster(nc-1, type = 'FORK')`
+This will create a <i>Parallel Socket Cluster</i> (PSOCK), which can be done in all operating systems. However, it only starts with the base packages and thus you need to export variables, functions and packages to the cluster (see further below) if you need them in your parallel code.
+
+You can also create a FORK cluster, which has better capabilities to manage memory and already contain all the variables from the local environment (i.e., no need for export) since all the cores share the same memory. For this, use: 
+`cl <- makeCluster(2, type = 'FORK')` 
+The "2" stands for the number of cores in the cluster.
 Note, however, that Windows does not support FORK clusters.
 
 # foreach loops
