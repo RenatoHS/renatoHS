@@ -47,7 +47,7 @@ Tip 2 &amp;hellip;</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/tutorial/tut_2/</guid>
-      <description>body{ /* Normal */font-size: 14px;}h1 { /* Header 1 */font-size: 26px;color: DarkGreen;}h2 { /* Header 2 */font-size: 22px;color: DarkGreen;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 14px;}Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it?</description>
+      <description>body{ /* Normal */font-size: 14px;}h1 { /* Header 1 */font-size: 26px;color: DarkGreen;}h2 { /* Header 2 */font-size: 22px;color: DarkGreen;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 14px;}The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models.</description>
     </item>
     
   </channel>
