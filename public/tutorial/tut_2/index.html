@@ -406,7 +406,7 @@ pre { /* Code block - determines code spacing between lines */
     font-size: 14px;
 }
 </style>
-<p>The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. I thus assume that you already know what a null model is. :smile:</p>
+<p>The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. I thus assume that you already know what a null model is. :) Otherwise, there is an excellent book on the subject that is freely available to download at <a href="https://www.uvm.edu/~ngotelli/nullmodelspage.html">Gotelli and Graves 1996</a></p>
 <p>Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.</p>
 <p>Before deciding to parallelize your code, remember that there is a trade-off between performance and simplicity. It takes some time to set up the parallel cluster so if your code already runs fast it is not worth it. If your code repeats a similar task over and over (e.g., bootstraping) then it is recommended to parallize to improve performance. Hence, parallel computing is ideal for null models.</p>
 <p>While there are many good tutorials on parallel computing in R out there, I think it is better to provide a small introduction on how to set up a parallel cluster and how to start coding in parallel before jumping on the null models.</p>
@@ -420,16 +420,13 @@ pre { /* Code block - determines code spacing between lines */
 <li>doParallel</li>
 <li>foreach</li>
 </ul>
-<p>First install packages <code>install.packages(&quot;doParallel&quot;)</code>. The <i>doParallel</i> library installs both <i>parallel</i> and <i>foreach</i> packages.</p>
-<p>Then set up a parallel cluster. Use the function <code>detectCores</code> from the <i>parallel</i> library to detect the number of cores in your computer. It is always recommended to leave one core free for the computer to run other processes. For simplicity we will use 2 cores in this example.</p>
-<pre class="r"><code>library(doParallel)</code></pre>
+<p>First install packages <code>install.packages(&quot;doParallel&quot;)</code>. The <em>doParallel</em> library installs both <em>parallel</em> and <em>foreach</em> packages.</p>
+<p>Then set up a parallel cluster. Use the function <code>detectCores</code> from the <em>parallel</em> library to detect the number of cores in your computer. It is always recommended to leave one core free for the computer to run other processes. For simplicity we will use 2 cores in this example.</p>
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
-<pre class="r"><code>detectCores()</code></pre>
 <pre><code>## [1] 4</code></pre>
-<pre class="r"><code>cl &lt;- makeCluster(2, type = &#39;PSOCK&#39;)</code></pre>
-<p>This will create a <i>Parallel Socket Cluster</i> (PSOCK), which can be done in all operating systems. However, it only starts with the base packages and thus you need to export variables, functions and packages to the cluster (see further below) if you need them in your parallel code.</p>
+<p>This will create a <em>Parallel Socket Cluster</em> (PSOCK), which can be done in all operating systems. However, it only starts with the base packages and thus you need to export variables, functions and packages to the cluster (see further below) if you need them in your parallel code.</p>
 <p>You can also create a FORK cluster, which has better capabilities to manage memory and already contain all the variables from the local environment (i.e., no need for export) since all the cores share the same memory. For this, use: <code>cl &lt;- makeCluster(2, type = 'FORK')</code> The “2” stands for the number of cores in the cluster. Note, however, that Windows does not support FORK clusters.</p>
 </div>
 <div id="foreach-loops" class="section level1">
