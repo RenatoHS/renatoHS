@@ -25,7 +25,7 @@ pre { /* Code block - determines code spacing between lines */
 
 The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. 
 I thus assume that you already know what a null model is. :)
-Otherwise, there is an excellent book on the subject that is freely available to download at [Gotelli and Graves 1996](https://www.uvm.edu/~ngotelli/nullmodelspage.html)
+Otherwise, there is an excellent book on the subject (Gotelli and Graves, 1996) that is freely available to download [here](https://www.uvm.edu/~ngotelli/nullmodelspage.html).
 
 Why use parallel processing? The simple answer is time.
 If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster. 
@@ -52,16 +52,15 @@ Then set up a parallel cluster.
 Use the function `detectCores` from the _parallel_ library to detect the number of cores in your computer.
 It is always recommended to leave one core free for the computer to run other processes.
 For simplicity we will use 2 cores in this example.
-```{r, echo=FALSE}
+```{r}
 library(doParallel)
 detectCores()
 cl <- makeCluster(2, type = 'PSOCK')
 ```
-This will create a _Parallel Socket Cluster_ (PSOCK), which can be done in all operating systems. However, it only starts with the base packages and thus you need to export variables, functions and packages to the cluster (see further below) if you need them in your parallel code.
+This will create a _Parallel Socket Cluster_ (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallel code.
 
 You can also create a FORK cluster, which has better capabilities to manage memory and already contain all the variables from the local environment (i.e., no need for export) since all the cores share the same memory. For this, use: 
 `cl <- makeCluster(2, type = 'FORK')` 
-The "2" stands for the number of cores in the cluster.
 Note, however, that Windows does not support FORK clusters.
 
 # foreach loops
@@ -84,7 +83,7 @@ foreach(i = 1:6, .combine = c) %do% {
 
 ```
 If you want to use the foreach in parallel mode, you need to change %do% to %dopar%.
-You also need to register the parallel backbend. Here we use the <i>doParallel</i> package to do this
+You also need to register the cluster. Here we use the _doParallel_ package to do this
 ```{r}
 registerDoParallel(cl)
 
@@ -93,11 +92,10 @@ foreach(i = 1:6, .combine = c) %dopar% {
 }
 
 ```
-If you want to use a variable or object from the global environment in the parallel cluster, you first need to export it either using the `clusterExport` function, or using the .export argument in the foreach function
+If you want to use a variable or object from the global environment in the parallel cluster, you first need to export it either using the `clusterExport` function, or using the .export argument in the foreach function. Below I use the argument
 ```{r}
 var1 <-10
 var2 <-5
-#clusterExport(cl, c("var1","var2"))
 
 foreach(i = 1:6, .combine = c, .export = c("var1","var2")) %dopar% {
   (var1+var2)*i
@@ -105,6 +103,7 @@ foreach(i = 1:6, .combine = c, .export = c("var1","var2")) %dopar% {
 
 ```
 If you need to use a particular function in the parallel cluster, you also need to export it.
+Here we use the `clusterExport` function.
 ```{r}
 is_even <- function(x) x %% 2 == 0
 
@@ -123,29 +122,56 @@ We want to compute the growth of each chick (i.e., weigth ~ Time). We can use th
 data("ChickWeight")
 clusterEvalQ(cl,library("dplyr"))
 clusterExport(cl,"ChickWeight")
-numb_chicks <- length(unique(ChickWeight$Chick))
 
-new_data<- foreach(i = 1:numb_chicks, .combine = rbind, .packages = "dplyr") %dopar% {
-  
-  
-  temp_data <- ChickWeight %>% filter(Chick == i) %>% mutate(Growth = lm(weight ~ Time)$coeff[2])
-  
+length(unique(ChickWeight$Chick))
+#there are 50 unique chicks in this data
+
+Growth_coeff<- foreach(i = 1:50, .combine = rbind, .packages = "dplyr") %dopar% {
+  temp_data <- ChickWeight %>% filter(Chick == i)
+  Growth = lm(weight ~ Time, data = temp_data)
+  coefficients(Growth)
 }
 
-head(new_data)
+head(Growth_coeff)
 
 ```
-In this example, the combine = .rbind parameter will combine the matrices "temp_data" into the "new_data" output. 
+In the example above the `combine = .rbind` argument will combine `coefficients(Growth)` into the `Growth_coeff` output. 
 
+Finally, let's see how much time do we save by using the parallelized code.
+In this case we will repeat the above code 100 times and use the `system.time` function to determine how much times it takes to run. 
 
-
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+First in sequential mode (%do%)
+```{r}
+trials <- 100
+system.time({
+  Growth_coeff <- foreach(icount(trials), .combine=rbind, .packages = "dplyr") %do% {
+    
+    temp_coeff<-matrix(numeric(),ncol=2,nrow=50)
+    for(i in 1:50){
+      temp_data <- ChickWeight %>% filter(Chick == i)
+      Growth = lm(weight ~ Time, data = temp_data)
+      temp_coeff[i,]=coefficients(Growth)
+    }
+   temp_coeff
+  }
+})
 ```
+And now in parallel mode (%dopar%)
+```{r}
+trials <- 100
+system.time({
+  Growth_coeff <- foreach(icount(trials), .combine=rbind, .packages = "dplyr") %dopar% {
+    
+    temp_coeff<-matrix(numeric(),ncol=2,nrow=50)
+    for(i in 1:50){
+      temp_data <- ChickWeight %>% filter(Chick == i)
+      Growth = lm(weight ~ Time, data = temp_data)
+      temp_coeff[i,]=coefficients(Growth)
+    }
+   temp_coeff
+  }
+})
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```
+As you can see, the script ran in 10.31 seconds in sequential mode and 6.69 in parallel mode with only 2 cores.
+
