@@ -543,7 +543,7 @@ system.time({
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre><code>##    user  system elapsed 
-##   14.96    0.17   17.45</code></pre>
+##   10.68    0.17   11.03</code></pre>
 <p>And now in parallel mode (%dopar%)</p>
 <pre class="r"><code>trials &lt;- 100
 system.time({
@@ -559,7 +559,7 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.03    0.03    6.37</code></pre>
+##    0.11    0.02    7.20</code></pre>
 <p>As you can see, the script takes more than 10 seconds in sequential mode but less than 7 seconds in parallel mode.</p>
 </div>
 
