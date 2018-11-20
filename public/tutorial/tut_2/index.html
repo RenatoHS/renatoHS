@@ -15,7 +15,25 @@
   
     
   
-  <meta name="description" content="body{ /* Normal */font-size: 14px;}h1 { /* Header 1 */font-size: 26px;color: DarkGreen;}h2 { /* Header 2 */font-size: 22px;color: DarkGreen;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 12px;}The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models.">
+  <meta name="description" content="body{ /* Normal */
+font-size: 14px;
+}
+h1 { /* Header 1 */
+font-size: 26px;
+color: DarkGreen;
+}
+h2 { /* Header 2 */
+font-size: 22px;
+color: DarkGreen;
+}
+code.r{ /* Code block */
+font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+font-size: 12px;
+}
+
+The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models.">
 
   
   <link rel="alternate" hreflang="en-us" href="/tutorial/tut_2/">
@@ -93,7 +111,25 @@
   <meta property="og:site_name" content="Renato HS">
   <meta property="og:url" content="/tutorial/tut_2/">
   <meta property="og:title" content="Introduction to Parallel Computing | Renato HS">
-  <meta property="og:description" content="body{ /* Normal */font-size: 14px;}h1 { /* Header 1 */font-size: 26px;color: DarkGreen;}h2 { /* Header 2 */font-size: 22px;color: DarkGreen;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 12px;}The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models.">
+  <meta property="og:description" content="body{ /* Normal */
+font-size: 14px;
+}
+h1 { /* Header 1 */
+font-size: 26px;
+color: DarkGreen;
+}
+h2 { /* Header 2 */
+font-size: 22px;
+color: DarkGreen;
+}
+code.r{ /* Code block */
+font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+font-size: 12px;
+}
+
+The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models.">
   
   
     
@@ -300,7 +336,7 @@
     
     <meta content="" itemprop="datePublished">
     <time datetime="" itemprop="dateModified">
-      Jan 1, 0001
+      Nov 20, 2018
     </time>
   </span>
   <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
@@ -543,7 +579,7 @@ system.time({
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre><code>##    user  system elapsed 
-##   10.68    0.17   11.03</code></pre>
+##   11.23    0.13   11.68</code></pre>
 <p>And now in parallel mode (%dopar%)</p>
 <pre class="r"><code>trials &lt;- 100
 system.time({
@@ -559,7 +595,7 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.11    0.02    7.20</code></pre>
+##    0.08    0.02   10.48</code></pre>
 <p>As you can see, the script takes more than 10 seconds in sequential mode but less than 7 seconds in parallel mode.</p>
 </div>
 

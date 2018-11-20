@@ -1,5 +1,6 @@
 ---
 title: "Introduction to Parallel Computing"
+date: Nov 20, 2018
 output: html_document
 ---
 
@@ -161,7 +162,7 @@ system.time({
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre><code>##    user  system elapsed 
-##   10.68    0.17   11.03</code></pre>
+##   11.23    0.13   11.68</code></pre>
 <p>And now in parallel mode (%dopar%)</p>
 <pre class="r"><code>trials &lt;- 100
 system.time({
@@ -177,6 +178,6 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.11    0.02    7.20</code></pre>
+##    0.08    0.02   10.48</code></pre>
 <p>As you can see, the script takes more than 10 seconds in sequential mode but less than 7 seconds in parallel mode.</p>
 </div>

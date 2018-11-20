@@ -1,5 +1,6 @@
 ---
 title: "Introduction to Parallel Computing"
+date: Nov 20, 2018
 output: html_document
 ---
 <style type="text/css">
