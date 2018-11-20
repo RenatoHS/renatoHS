@@ -50,11 +50,14 @@ First install packages `install.packages("doParallel")`. The _doParallel_ librar
 
 Then set up a parallel cluster.
 Use the function `detectCores` from the _parallel_ library to detect the number of cores in your computer.
-It is always recommended to leave one core free for the computer to run other processes.
-For simplicity we will use 2 cores in this example.
+
 ```{r}
 library(doParallel)
 detectCores()
+```
+It is always recommended to leave one core free for the computer to run other processes.
+For simplicity we will use 2 cores in this example.
+```{r}
 cl <- makeCluster(2, type = 'PSOCK')
 ```
 This will create a _Parallel Socket Cluster_ (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallel code.

@@ -421,13 +421,14 @@ pre { /* Code block - determines code spacing between lines */
 <li>foreach</li>
 </ul>
 <p>First install packages <code>install.packages(&quot;doParallel&quot;)</code>. The <em>doParallel</em> library installs both <em>parallel</em> and <em>foreach</em> packages.</p>
-<p>Then set up a parallel cluster. Use the function <code>detectCores</code> from the <em>parallel</em> library to detect the number of cores in your computer. It is always recommended to leave one core free for the computer to run other processes. For simplicity we will use 2 cores in this example.</p>
+<p>Then set up a parallel cluster. Use the function <code>detectCores</code> from the <em>parallel</em> library to detect the number of cores in your computer.</p>
 <pre class="r"><code>library(doParallel)</code></pre>
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
 <pre class="r"><code>detectCores()</code></pre>
 <pre><code>## [1] 4</code></pre>
+<p>It is always recommended to leave one core free for the computer to run other processes. For simplicity we will use 2 cores in this example.</p>
 <pre class="r"><code>cl &lt;- makeCluster(2, type = &#39;PSOCK&#39;)</code></pre>
 <p>This will create a <em>Parallel Socket Cluster</em> (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallel code.</p>
 <p>You can also create a FORK cluster, which has better capabilities to manage memory and already contain all the variables from the local environment (i.e., no need for export) since all the cores share the same memory. For this, use: <code>cl &lt;- makeCluster(2, type = 'FORK')</code> Note, however, that Windows does not support FORK clusters.</p>
@@ -543,7 +544,7 @@ system.time({
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre><code>##    user  system elapsed 
-##   13.13    0.11   14.46</code></pre>
+##   13.30    0.06   14.90</code></pre>
 <p>And now in parallel mode (%dopar%)</p>
 <pre class="r"><code>trials &lt;- 100
 system.time({
@@ -559,7 +560,7 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.12    0.02    8.79</code></pre>
+##    0.06    0.05   12.23</code></pre>
 <p>As you can see, the script takes more than 10 seconds in sequential mode but less than 7 seconds in parallel mode.</p>
 </div>
 
