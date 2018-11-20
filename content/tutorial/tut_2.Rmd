@@ -25,6 +25,7 @@ pre { /* Code block - determines code spacing between lines */
 
 The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. 
 I thus assume that you already know what a null model is. :)
+
 Otherwise, there is an excellent book on the subject (Gotelli and Graves, 1996) that is freely available to download [here](https://www.uvm.edu/~ngotelli/nullmodelspage.html).
 
 Why use parallel processing? The simple answer is time.
@@ -44,23 +45,23 @@ There are many packages to run parallel processing in R. Here are a few examples
 * doParallel
 * foreach
 
-
-
-First install packages `install.packages("doParallel")`. The _doParallel_ library installs both _parallel_ and _foreach_ packages.
+First install the _doParallel_ package `install.packages("doParallel")`, which also installs both _parallel_ and _foreach_ packages.
+```{r}
+library(doParallel)
+```
 
 Then set up a parallel cluster.
 Use the function `detectCores` from the _parallel_ library to detect the number of cores in your computer.
-
 ```{r}
-library(doParallel)
 detectCores()
 ```
+My computer has 4 cores.
 It is always recommended to leave one core free for the computer to run other processes.
-For simplicity we will use 2 cores in this example.
+For simplicity we will use 2 cores in this tutorial.
 ```{r}
 cl <- makeCluster(2, type = 'PSOCK')
 ```
-This will create a _Parallel Socket Cluster_ (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallel code.
+This will create a _Parallel Socket Cluster_ (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallelized code.
 
 You can also create a FORK cluster, which has better capabilities to manage memory and already contain all the variables from the local environment (i.e., no need for export) since all the cores share the same memory. For this, use: 
 `cl <- makeCluster(2, type = 'FORK')` 
@@ -176,5 +177,3 @@ system.time({
 })
 
 ```
-As you can see, the script takes more than 10 seconds in sequential mode but less than 7 seconds in parallel mode.
-

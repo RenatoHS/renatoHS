@@ -539,7 +539,8 @@ pre { /* Code block - determines code spacing between lines */
     font-size: 12px;
 }
 &lt;/style&gt;
-&lt;p&gt;The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. I thus assume that you already know what a null model is. :) Otherwise, there is an excellent book on the subject (Gotelli and Graves, 1996) that is freely available to download &lt;a href=&#34;https://www.uvm.edu/~ngotelli/nullmodelspage.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. I thus assume that you already know what a null model is. :)&lt;/p&gt;
+&lt;p&gt;Otherwise, there is an excellent book on the subject (Gotelli and Graves, 1996) that is freely available to download &lt;a href=&#34;https://www.uvm.edu/~ngotelli/nullmodelspage.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.&lt;/p&gt;
 &lt;p&gt;Before deciding to parallelize your code, remember that there is a trade-off between performance and simplicity. It takes some time to set up the parallel cluster so if your code already runs fast it is not worth it. If your code repeats a similar task over and over (e.g., bootstraping) then it is recommended to parallize to improve performance. Hence, parallel computing is ideal for null models.&lt;/p&gt;
 &lt;p&gt;While there are many good tutorials on parallel computing in R out there, I think it is better to provide a small introduction on how to set up a parallel cluster and how to start coding in parallel before jumping on the null models.&lt;/p&gt;
@@ -553,17 +554,17 @@ pre { /* Code block - determines code spacing between lines */
 &lt;li&gt;doParallel&lt;/li&gt;
 &lt;li&gt;foreach&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;First install packages &lt;code&gt;install.packages(&amp;quot;doParallel&amp;quot;)&lt;/code&gt;. The &lt;em&gt;doParallel&lt;/em&gt; library installs both &lt;em&gt;parallel&lt;/em&gt; and &lt;em&gt;foreach&lt;/em&gt; packages.&lt;/p&gt;
-&lt;p&gt;Then set up a parallel cluster. Use the function &lt;code&gt;detectCores&lt;/code&gt; from the &lt;em&gt;parallel&lt;/em&gt; library to detect the number of cores in your computer.&lt;/p&gt;
+&lt;p&gt;First install the &lt;em&gt;doParallel&lt;/em&gt; package &lt;code&gt;install.packages(&amp;quot;doParallel&amp;quot;)&lt;/code&gt;, which also installs both &lt;em&gt;parallel&lt;/em&gt; and &lt;em&gt;foreach&lt;/em&gt; packages.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(doParallel)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Loading required package: foreach&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Loading required package: iterators&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Loading required package: parallel&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then set up a parallel cluster. Use the function &lt;code&gt;detectCores&lt;/code&gt; from the &lt;em&gt;parallel&lt;/em&gt; library to detect the number of cores in your computer.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;detectCores()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 4&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It is always recommended to leave one core free for the computer to run other processes. For simplicity we will use 2 cores in this example.&lt;/p&gt;
+&lt;p&gt;My computer has 4 cores. It is always recommended to leave one core free for the computer to run other processes. For simplicity we will use 2 cores in this tutorial.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cl &amp;lt;- makeCluster(2, type = &amp;#39;PSOCK&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This will create a &lt;em&gt;Parallel Socket Cluster&lt;/em&gt; (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallel code.&lt;/p&gt;
+&lt;p&gt;This will create a &lt;em&gt;Parallel Socket Cluster&lt;/em&gt; (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallelized code.&lt;/p&gt;
 &lt;p&gt;You can also create a FORK cluster, which has better capabilities to manage memory and already contain all the variables from the local environment (i.e., no need for export) since all the cores share the same memory. For this, use: &lt;code&gt;cl &amp;lt;- makeCluster(2, type = &#39;FORK&#39;)&lt;/code&gt; Note, however, that Windows does not support FORK clusters.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;foreach-loops&#34; class=&#34;section level1&#34;&gt;
@@ -677,7 +678,7 @@ system.time({
 ## 
 ##     intersect, setdiff, setequal, union&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    user  system elapsed 
-##   13.30    0.06   14.90&lt;/code&gt;&lt;/pre&gt;
+##   10.62    0.10   10.91&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;And now in parallel mode (%dopar%)&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;trials &amp;lt;- 100
 system.time({
@@ -693,8 +694,7 @@ system.time({
   }
 })&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    user  system elapsed 
-##    0.06    0.05   12.23&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;As you can see, the script takes more than 10 seconds in sequential mode but less than 7 seconds in parallel mode.&lt;/p&gt;
+##    0.10    0.08    7.82&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 </description>
     </item>

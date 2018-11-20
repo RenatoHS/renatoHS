@@ -25,7 +25,8 @@ pre { /* Code block - determines code spacing between lines */
     font-size: 12px;
 }
 </style>
-<p>The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. I thus assume that you already know what a null model is. :) Otherwise, there is an excellent book on the subject (Gotelli and Graves, 1996) that is freely available to download <a href="https://www.uvm.edu/~ngotelli/nullmodelspage.html">here</a>.</p>
+<p>The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. I thus assume that you already know what a null model is. :)</p>
+<p>Otherwise, there is an excellent book on the subject (Gotelli and Graves, 1996) that is freely available to download <a href="https://www.uvm.edu/~ngotelli/nullmodelspage.html">here</a>.</p>
 <p>Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.</p>
 <p>Before deciding to parallelize your code, remember that there is a trade-off between performance and simplicity. It takes some time to set up the parallel cluster so if your code already runs fast it is not worth it. If your code repeats a similar task over and over (e.g., bootstraping) then it is recommended to parallize to improve performance. Hence, parallel computing is ideal for null models.</p>
 <p>While there are many good tutorials on parallel computing in R out there, I think it is better to provide a small introduction on how to set up a parallel cluster and how to start coding in parallel before jumping on the null models.</p>
@@ -39,17 +40,17 @@ pre { /* Code block - determines code spacing between lines */
 <li>doParallel</li>
 <li>foreach</li>
 </ul>
-<p>First install packages <code>install.packages(&quot;doParallel&quot;)</code>. The <em>doParallel</em> library installs both <em>parallel</em> and <em>foreach</em> packages.</p>
-<p>Then set up a parallel cluster. Use the function <code>detectCores</code> from the <em>parallel</em> library to detect the number of cores in your computer.</p>
+<p>First install the <em>doParallel</em> package <code>install.packages(&quot;doParallel&quot;)</code>, which also installs both <em>parallel</em> and <em>foreach</em> packages.</p>
 <pre class="r"><code>library(doParallel)</code></pre>
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
+<p>Then set up a parallel cluster. Use the function <code>detectCores</code> from the <em>parallel</em> library to detect the number of cores in your computer.</p>
 <pre class="r"><code>detectCores()</code></pre>
 <pre><code>## [1] 4</code></pre>
-<p>It is always recommended to leave one core free for the computer to run other processes. For simplicity we will use 2 cores in this example.</p>
+<p>My computer has 4 cores. It is always recommended to leave one core free for the computer to run other processes. For simplicity we will use 2 cores in this tutorial.</p>
 <pre class="r"><code>cl &lt;- makeCluster(2, type = &#39;PSOCK&#39;)</code></pre>
-<p>This will create a <em>Parallel Socket Cluster</em> (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallel code.</p>
+<p>This will create a <em>Parallel Socket Cluster</em> (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallelized code.</p>
 <p>You can also create a FORK cluster, which has better capabilities to manage memory and already contain all the variables from the local environment (i.e., no need for export) since all the cores share the same memory. For this, use: <code>cl &lt;- makeCluster(2, type = 'FORK')</code> Note, however, that Windows does not support FORK clusters.</p>
 </div>
 <div id="foreach-loops" class="section level1">
@@ -163,7 +164,7 @@ system.time({
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre><code>##    user  system elapsed 
-##   13.30    0.06   14.90</code></pre>
+##   10.62    0.10   10.91</code></pre>
 <p>And now in parallel mode (%dopar%)</p>
 <pre class="r"><code>trials &lt;- 100
 system.time({
@@ -179,6 +180,5 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.06    0.05   12.23</code></pre>
-<p>As you can see, the script takes more than 10 seconds in sequential mode but less than 7 seconds in parallel mode.</p>
+##    0.10    0.08    7.82</code></pre>
 </div>
