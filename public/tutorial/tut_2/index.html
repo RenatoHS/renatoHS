@@ -15,7 +15,7 @@
   
     
   
-  <meta name="description" content="body{ /* Normal */font-size: 14px;}h1 { /* Header 1 */font-size: 26px;color: DarkGreen;}h2 { /* Header 2 */font-size: 22px;color: DarkGreen;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 14px;}The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models.">
+  <meta name="description" content="body{ /* Normal */font-size: 14px;}h1 { /* Header 1 */font-size: 26px;color: DarkGreen;}h2 { /* Header 2 */font-size: 22px;color: DarkGreen;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 12px;}The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models.">
 
   
   <link rel="alternate" hreflang="en-us" href="/tutorial/tut_2/">
@@ -93,7 +93,7 @@
   <meta property="og:site_name" content="Renato HS">
   <meta property="og:url" content="/tutorial/tut_2/">
   <meta property="og:title" content="Introduction to Parallel Computing | Renato HS">
-  <meta property="og:description" content="body{ /* Normal */font-size: 14px;}h1 { /* Header 1 */font-size: 26px;color: DarkGreen;}h2 { /* Header 2 */font-size: 22px;color: DarkGreen;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 14px;}The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models.">
+  <meta property="og:description" content="body{ /* Normal */font-size: 14px;}h1 { /* Header 1 */font-size: 26px;color: DarkGreen;}h2 { /* Header 2 */font-size: 22px;color: DarkGreen;}code.r{ /* Code block */font-size: 12px;}pre { /* Code block - determines code spacing between lines */font-size: 12px;}The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models.">
   
   
     
@@ -403,7 +403,7 @@ code.r{ /* Code block */
     font-size: 12px;
 }
 pre { /* Code block - determines code spacing between lines */
-    font-size: 14px;
+    font-size: 12px;
 }
 </style>
 <p>The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. I thus assume that you already know what a null model is. :) Otherwise, there is an excellent book on the subject (Gotelli and Graves, 1996) that is freely available to download <a href="https://www.uvm.edu/~ngotelli/nullmodelspage.html">here</a>.</p>
@@ -461,14 +461,14 @@ foreach(i = 1:6) %do% {
   sqrt(i)
 }</code></pre>
 <pre><code>## [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490</code></pre>
-<p>If you want to use the foreach in parallel mode, you need to change %do% to %dopar%. You also need to register the cluster. Here we use the <em>doParallel</em> package to do this</p>
+<p>If you want to use the foreach in parallel mode, you need to change %do% to %dopar%. You also need to register the cluster. Here we use the <em>doParallel</em> package to do this.</p>
 <pre class="r"><code>registerDoParallel(cl)
 
 foreach(i = 1:6, .combine = c) %dopar% {
   sqrt(i)
 }</code></pre>
 <pre><code>## [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490</code></pre>
-<p>If you want to use a variable or object from the global environment in the parallel cluster, you first need to export it either using the <code>clusterExport</code> function, or using the .export argument in the foreach function. Below I use the argument</p>
+<p>If you want to use a variable or object from the global environment in the parallel cluster, you first need to export it either using the <code>clusterExport</code> function, or using the .export argument in the foreach function. Here I use the .export argument for exporting.</p>
 <pre class="r"><code>var1 &lt;-10
 var2 &lt;-5
 
@@ -478,7 +478,7 @@ foreach(i = 1:6, .combine = c, .export = c(&quot;var1&quot;,&quot;var2&quot;)) %
 <pre><code>## Warning in e$fun(obj, substitute(ex), parent.frame(), e$data): already
 ## exporting variable(s): var1, var2</code></pre>
 <pre><code>## [1] 15 30 45 60 75 90</code></pre>
-<p>If you need to use a particular function in the parallel cluster, you also need to export it. Here we use the <code>clusterExport</code> function.</p>
+<p>If you need to use a particular function in the parallel cluster, you also need to export it. Here I use the <code>clusterExport</code> function.</p>
 <pre class="r"><code>is_even &lt;- function(x) x %% 2 == 0
 
 clusterExport(cl, c(&quot;var1&quot;,&quot;var2&quot;,&quot;is_even&quot;))
@@ -487,8 +487,8 @@ foreach(i = 1:6, .combine = c) %dopar% {
   is_even((var1+var2)*i)
 }</code></pre>
 <pre><code>## [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
-<p>If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster. This can be done by the argument “.package” in the foreach function or by using the <code>ClusterEvalQ</code> function.</p>
-<p>Let’s use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Diet. We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to apply the <code>lm</code> function to each chick in the dataset. If the output is a matrix and you want to combine the results by rows, you can use “.combine = rbind”.</p>
+<p>If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster as well. This can be done by the argument “.package” in the foreach function or by using the <code>ClusterEvalQ</code> function.</p>
+<p>Let’s use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Diet. We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to subset each chick from the dataset and then apply the <code>lm</code> function to each one separately. Here we want the coefficients of the linear model as a result and we will combine them by rows by using “.combine = rbind”.</p>
 <pre class="r"><code>data(&quot;ChickWeight&quot;)
 clusterEvalQ(cl,library(&quot;dplyr&quot;))</code></pre>
 <pre><code>## [[1]]
@@ -518,7 +518,7 @@ head(Growth_coeff)</code></pre>
 ## result.4    32.86568  6.088640
 ## result.5    16.89563 10.055362
 ## result.6    44.12343  6.378006</code></pre>
-<p>In the example above the <code>combine = .rbind</code> argument will combine <code>coefficients(Growth)</code> into the <code>Growth_coeff</code> output.</p>
+<p>In the example above the <code>combine = .rbind</code> argument combined <code>coefficients(Growth)</code> into the <code>Growth_coeff</code> output.</p>
 <p>Finally, let’s see how much time do we save by using the parallelized code. In this case we will repeat the above code 100 times and use the <code>system.time</code> function to determine how much times it takes to run.</p>
 <p>First in sequential mode (%do%)</p>
 <pre class="r"><code>trials &lt;- 100
@@ -543,7 +543,7 @@ system.time({
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre><code>##    user  system elapsed 
-##   10.28    0.12   10.47</code></pre>
+##   14.96    0.17   17.45</code></pre>
 <p>And now in parallel mode (%dopar%)</p>
 <pre class="r"><code>trials &lt;- 100
 system.time({
@@ -559,8 +559,8 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.05    0.03    6.56</code></pre>
-<p>As you can see, the script ran in 10.31 seconds in sequential mode and 6.69 in parallel mode with only 2 cores.</p>
+##    0.03    0.03    6.37</code></pre>
+<p>As you can see, the script takes more than 10 seconds in sequential mode but less than 7 seconds in parallel mode.</p>
 </div>
 
     </div>

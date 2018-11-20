@@ -19,7 +19,7 @@ code.r{ /* Code block */
     font-size: 12px;
 }
 pre { /* Code block - determines code spacing between lines */
-    font-size: 14px;
+    font-size: 12px;
 }
 </style>
 
@@ -83,7 +83,7 @@ foreach(i = 1:6, .combine = c) %do% {
 
 ```
 If you want to use the foreach in parallel mode, you need to change %do% to %dopar%.
-You also need to register the cluster. Here we use the _doParallel_ package to do this
+You also need to register the cluster. Here we use the _doParallel_ package to do this.
 ```{r}
 registerDoParallel(cl)
 
@@ -92,7 +92,7 @@ foreach(i = 1:6, .combine = c) %dopar% {
 }
 
 ```
-If you want to use a variable or object from the global environment in the parallel cluster, you first need to export it either using the `clusterExport` function, or using the .export argument in the foreach function. Below I use the argument
+If you want to use a variable or object from the global environment in the parallel cluster, you first need to export it either using the `clusterExport` function, or using the .export argument in the foreach function. Here I use the .export argument for exporting.
 ```{r}
 var1 <-10
 var2 <-5
@@ -103,7 +103,7 @@ foreach(i = 1:6, .combine = c, .export = c("var1","var2")) %dopar% {
 
 ```
 If you need to use a particular function in the parallel cluster, you also need to export it.
-Here we use the `clusterExport` function.
+Here I use the `clusterExport` function.
 ```{r}
 is_even <- function(x) x %% 2 == 0
 
@@ -114,10 +114,10 @@ foreach(i = 1:6, .combine = c) %dopar% {
 }
 
 ```
-If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster. This can be done by the argument ".package" in the foreach function or by using the `ClusterEvalQ` function.
+If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster as well. This can be done by the argument ".package" in the foreach function or by using the `ClusterEvalQ` function.
 
 Let's use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Diet. 
-We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to apply the `lm` function to each chick in the dataset. If the output is a matrix and you want to combine the results by rows, you can use ".combine = rbind".
+We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to subset each chick from the dataset and then apply the `lm` function to each one separately. Here we want the coefficients of the linear model as a result and we will combine them by rows by using ".combine = rbind".
 ```{r}
 data("ChickWeight")
 clusterEvalQ(cl,library("dplyr"))
@@ -135,7 +135,7 @@ Growth_coeff<- foreach(i = 1:50, .combine = rbind, .packages = "dplyr") %dopar% 
 head(Growth_coeff)
 
 ```
-In the example above the `combine = .rbind` argument will combine `coefficients(Growth)` into the `Growth_coeff` output. 
+In the example above the `combine = .rbind` argument combined `coefficients(Growth)` into the `Growth_coeff` output. 
 
 Finally, let's see how much time do we save by using the parallelized code.
 In this case we will repeat the above code 100 times and use the `system.time` function to determine how much times it takes to run. 
@@ -173,5 +173,5 @@ system.time({
 })
 
 ```
-As you can see, the script ran in 10.31 seconds in sequential mode and 6.69 in parallel mode with only 2 cores.
+As you can see, the script takes more than 10 seconds in sequential mode but less than 7 seconds in parallel mode.
 
