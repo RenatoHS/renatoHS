@@ -143,11 +143,11 @@ head(Growth_coeff)
 In the example above the `combine = .rbind` argument combined `coefficients(Growth)` into the `Growth_coeff` output. 
 
 Finally, let's see how much time do we save by using the parallelized code.
-In this case we will repeat the above code 100 times and use the `system.time` function to determine how much times it takes to run. 
+In this case we will repeat the above code 300 times and use the `system.time` function to determine how much times it takes to run. 
 
 First in sequential mode (%do%)
 ```{r message = FALSE}
-trials <- 100
+trials <- 300
 system.time({
   Growth_coeff <- foreach(icount(trials), .combine=rbind, .packages = "dplyr") %do% {
     
@@ -163,7 +163,7 @@ system.time({
 ```
 And now in parallel mode (%dopar%)
 ```{r message = FALSE}
-trials <- 100
+trials <- 300
 system.time({
   Growth_coeff <- foreach(icount(trials), .combine=rbind, .packages = "dplyr") %dopar% {
     
