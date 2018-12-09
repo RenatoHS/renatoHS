@@ -1,11 +1,29 @@
 ---
-title: "Ozone"
-author: "Anonymous"
-date: "January 1, 2015"
-output:
-  html_document:
-    css: my_css_style.css
+title: "Introduction to Parallel Computing"
+author: "Renato Henriques-Silva"
+date: "November 20, 2018"
+output: html_document
 ---
+<style type="text/css">
+body{ /* Normal  */
+    font-size: 14px;
+}
+h1 { /* Header 1 */
+    font-size: 26px;
+  color: DarkGreen;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+  color: DarkGreen;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 12px;
+}
+</style>
+
 
 ## Why use parallel processing?
 

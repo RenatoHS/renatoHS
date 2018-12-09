@@ -1,14 +1,31 @@
 ---
-title: "Ozone"
-author: "Anonymous"
-date: "January 1, 2015"
-output:
-  html_document:
-    css: my_css_style.css
+title: "Introduction to Parallel Computing"
+author: "Renato Henriques-Silva"
+date: "November 20, 2018"
+output: html_document
 ---
 
 
 
+<style type="text/css">
+body{ /* Normal  */
+    font-size: 14px;
+}
+h1 { /* Header 1 */
+    font-size: 26px;
+  color: DarkGreen;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+  color: DarkGreen;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 12px;
+}
+</style>
 <div id="why-use-parallel-processing" class="section level2">
 <h2>Why use parallel processing?</h2>
 <p>The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. I thus assume that you already know what a null model is. :)</p>
@@ -141,7 +158,7 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   36.97    0.19   39.39</code></pre>
+##   32.68    0.19   33.66</code></pre>
 <p>And now in parallel mode (%dopar%)</p>
 <pre class="r"><code>trials &lt;- 300
 system.time({
@@ -157,6 +174,6 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.23    0.09   25.57</code></pre>
+##    0.27    0.08   35.45</code></pre>
 </div>
 </div>
