@@ -539,13 +539,15 @@ pre { /* Code block - determines code spacing between lines */
     font-size: 12px;
 }
 &lt;/style&gt;
+&lt;div id=&#34;why-use-parallel-processing&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Why use parallel processing?&lt;/h1&gt;
 &lt;p&gt;The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. I thus assume that you already know what a null model is. :)&lt;/p&gt;
 &lt;p&gt;Otherwise, there is an excellent book on the subject (Gotelli and Graves, 1996) that is freely available to download &lt;a href=&#34;https://www.uvm.edu/~ngotelli/nullmodelspage.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.&lt;/p&gt;
 &lt;p&gt;Before deciding to parallelize your code, remember that there is a trade-off between performance and simplicity. It takes some time to set up the parallel cluster so if your code already runs fast it is not worth it. If your code repeats a similar task over and over (e.g., bootstraping) then it is recommended to parallize to improve performance. Hence, parallel computing is ideal for null models.&lt;/p&gt;
 &lt;p&gt;While there are many good tutorials on parallel computing in R out there, I think it is better to provide a small introduction on how to set up a parallel cluster and how to start coding in parallel before jumping on the null models.&lt;/p&gt;
-&lt;div id=&#34;r-packages&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;R packages&lt;/h1&gt;
+&lt;div id=&#34;r-packages&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;R packages&lt;/h2&gt;
 &lt;p&gt;There are many packages to run parallel processing in R. Here are a few examples:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;parallel&lt;/li&gt;
@@ -556,9 +558,6 @@ pre { /* Code block - determines code spacing between lines */
 &lt;/ul&gt;
 &lt;p&gt;First install the &lt;em&gt;doParallel&lt;/em&gt; package &lt;code&gt;install.packages(&amp;quot;doParallel&amp;quot;)&lt;/code&gt;, which also installs both &lt;em&gt;parallel&lt;/em&gt; and &lt;em&gt;foreach&lt;/em&gt; packages.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(doParallel)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: foreach&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: iterators&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: parallel&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Then set up a parallel cluster. Use the function &lt;code&gt;detectCores&lt;/code&gt; from the &lt;em&gt;parallel&lt;/em&gt; library to detect the number of cores in your computer.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;detectCores()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 4&lt;/code&gt;&lt;/pre&gt;
@@ -567,11 +566,10 @@ pre { /* Code block - determines code spacing between lines */
 &lt;p&gt;This will create a &lt;em&gt;Parallel Socket Cluster&lt;/em&gt; (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallelized code.&lt;/p&gt;
 &lt;p&gt;You can also create a FORK cluster, which has better capabilities to manage memory and already contain all the variables from the local environment (i.e., no need for export) since all the cores share the same memory. For this, use: &lt;code&gt;cl &amp;lt;- makeCluster(2, type = &#39;FORK&#39;)&lt;/code&gt; Note, however, that Windows does not support FORK clusters.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;foreach-loops&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;foreach loops&lt;/h1&gt;
+&lt;div id=&#34;foreach-loops&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;foreach loops&lt;/h2&gt;
 &lt;p&gt;An intuitive way to perform a parallel process is to use the foreach function which looks like a for loop but operates as a lapply() function. As a first example we will perform the foreach function in sequential mode by using %do%&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(foreach)
-foreach(i = 1:6) %do% {
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;foreach(i = 1:6) %do% {
   sqrt(i)
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [[1]]
@@ -654,9 +652,9 @@ head(Growth_coeff)&lt;/code&gt;&lt;/pre&gt;
 ## result.5    16.89563 10.055362
 ## result.6    44.12343  6.378006&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In the example above the &lt;code&gt;combine = .rbind&lt;/code&gt; argument combined &lt;code&gt;coefficients(Growth)&lt;/code&gt; into the &lt;code&gt;Growth_coeff&lt;/code&gt; output.&lt;/p&gt;
-&lt;p&gt;Finally, let’s see how much time do we save by using the parallelized code. In this case we will repeat the above code 100 times and use the &lt;code&gt;system.time&lt;/code&gt; function to determine how much times it takes to run.&lt;/p&gt;
+&lt;p&gt;Finally, let’s see how much time do we save by using the parallelized code. In this case we will repeat the above code 300 times and use the &lt;code&gt;system.time&lt;/code&gt; function to determine how much times it takes to run.&lt;/p&gt;
 &lt;p&gt;First in sequential mode (%do%)&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;trials &amp;lt;- 100
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;trials &amp;lt;- 300
 system.time({
   Growth_coeff &amp;lt;- foreach(icount(trials), .combine=rbind, .packages = &amp;quot;dplyr&amp;quot;) %do% {
     
@@ -669,18 +667,10 @@ system.time({
    temp_coeff
   }
 })&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Attaching package: &amp;#39;dplyr&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:stats&amp;#39;:
-## 
-##     filter, lag&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:base&amp;#39;:
-## 
-##     intersect, setdiff, setequal, union&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    user  system elapsed 
-##   10.62    0.10   10.91&lt;/code&gt;&lt;/pre&gt;
+##   43.85    0.31   48.85&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;And now in parallel mode (%dopar%)&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;trials &amp;lt;- 100
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;trials &amp;lt;- 300
 system.time({
   Growth_coeff &amp;lt;- foreach(icount(trials), .combine=rbind, .packages = &amp;quot;dplyr&amp;quot;) %dopar% {
     
@@ -694,7 +684,8 @@ system.time({
   }
 })&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    user  system elapsed 
-##    0.10    0.08    7.82&lt;/code&gt;&lt;/pre&gt;
+##    0.29    0.03   27.86&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 </description>
     </item>

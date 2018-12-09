@@ -1,9 +1,11 @@
 ---
 title: "Introduction to Parallel Computing"
-output:
-  pdf_document: default
-  html_document: default
-date: "Nov 20, 2018"
+author: "Renato Henriques-Silva"
+date: "November 20, 2018"
+output: 
+  html_document:
+    toc: TRUE
+    number_sections: TRUE
 ---
 <style type="text/css">
 body{ /* Normal  */
@@ -25,6 +27,8 @@ pre { /* Code block - determines code spacing between lines */
 }
 </style>
 
+# Why use parallel processing?
+
 The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. 
 I thus assume that you already know what a null model is. :)
 
@@ -37,7 +41,7 @@ Before deciding to parallelize your code, remember that there is a trade-off bet
 
 While there are many good tutorials on parallel computing in R out there, I think it is better to provide a small introduction on how to set up a parallel cluster and how to start coding in parallel before jumping on the null models.
 
-# R packages
+## R packages
 
 There are many packages to run parallel processing in R. Here are a few examples:
 
@@ -69,7 +73,7 @@ You can also create a FORK cluster, which has better capabilities to manage memo
 `cl <- makeCluster(2, type = 'FORK')` 
 Note, however, that Windows does not support FORK clusters.
 
-# foreach loops
+## foreach loops
 
 An intuitive way to perform a parallel process is to use the foreach function which looks like a for loop but operates as a lapply() function. As a first example we will perform the foreach function in sequential mode by using %do%
 
