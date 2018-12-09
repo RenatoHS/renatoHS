@@ -623,21 +623,13 @@ foreach(i = 1:6, .combine = c) %dopar% {
 &lt;p&gt;If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster as well. This can be done by the argument “.package” in the foreach function or by using the &lt;code&gt;ClusterEvalQ&lt;/code&gt; function.&lt;/p&gt;
 &lt;p&gt;Let’s use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Diet. We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to subset each chick from the dataset and then apply the &lt;code&gt;lm&lt;/code&gt; function to each one separately. Here we want the coefficients of the linear model as a result and we will combine them by rows by using “.combine = rbind”.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data(&amp;quot;ChickWeight&amp;quot;)
-clusterEvalQ(cl,library(&amp;quot;dplyr&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [[1]]
-## [1] &amp;quot;dplyr&amp;quot;     &amp;quot;stats&amp;quot;     &amp;quot;graphics&amp;quot;  &amp;quot;grDevices&amp;quot; &amp;quot;utils&amp;quot;     &amp;quot;datasets&amp;quot; 
-## [7] &amp;quot;methods&amp;quot;   &amp;quot;base&amp;quot;     
-## 
-## [[2]]
-## [1] &amp;quot;dplyr&amp;quot;     &amp;quot;stats&amp;quot;     &amp;quot;graphics&amp;quot;  &amp;quot;grDevices&amp;quot; &amp;quot;utils&amp;quot;     &amp;quot;datasets&amp;quot; 
-## [7] &amp;quot;methods&amp;quot;   &amp;quot;base&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;clusterExport(cl,&amp;quot;ChickWeight&amp;quot;)
-
-length(unique(ChickWeight$Chick))&lt;/code&gt;&lt;/pre&gt;
+clusterEvalQ(cl,library(&amp;quot;dplyr&amp;quot;))
+clusterExport(cl,&amp;quot;ChickWeight&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;length(unique(ChickWeight$Chick))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 50&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#there are 50 unique chicks in this data
 
-Growth_coeff&amp;lt;- foreach(i = 1:50, .combine = rbind, .packages = &amp;quot;dplyr&amp;quot;) %dopar% {
+Growth_coeff&amp;lt;- foreach(i = 1:50, .combine = rbind) %dopar% {
   temp_data &amp;lt;- ChickWeight %&amp;gt;% filter(Chick == i)
   Growth = lm(weight ~ Time, data = temp_data)
   coefficients(Growth)
@@ -671,7 +663,7 @@ system.time({
   }
 })&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    user  system elapsed 
-##   32.68    0.19   33.66&lt;/code&gt;&lt;/pre&gt;
+##   42.68    0.47   47.57&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;And now in parallel mode (%dopar%)&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;trials &amp;lt;- 300
 system.time({
@@ -687,7 +679,7 @@ system.time({
   }
 })&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    user  system elapsed 
-##    0.27    0.08   35.45&lt;/code&gt;&lt;/pre&gt;
+##    0.26    0.07   37.14&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

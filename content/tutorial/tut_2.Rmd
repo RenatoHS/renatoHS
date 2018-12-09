@@ -125,15 +125,17 @@ If you need to use a function from a R package in the parallel cluster, you need
 
 Let's use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Diet. 
 We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to subset each chick from the dataset and then apply the `lm` function to each one separately. Here we want the coefficients of the linear model as a result and we will combine them by rows by using ".combine = rbind".
-```{r message = FALSE}
+```{r message = FALSE,  results = 'hide'}
 data("ChickWeight")
 clusterEvalQ(cl,library("dplyr"))
 clusterExport(cl,"ChickWeight")
+```
 
+```{r message = FALSE}
 length(unique(ChickWeight$Chick))
 #there are 50 unique chicks in this data
 
-Growth_coeff<- foreach(i = 1:50, .combine = rbind, .packages = "dplyr") %dopar% {
+Growth_coeff<- foreach(i = 1:50, .combine = rbind) %dopar% {
   temp_data <- ChickWeight %>% filter(Chick == i)
   Growth = lm(weight ~ Time, data = temp_data)
   coefficients(Growth)

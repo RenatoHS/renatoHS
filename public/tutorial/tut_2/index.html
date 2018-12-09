@@ -490,21 +490,13 @@ foreach(i = 1:6, .combine = c) %dopar% {
 <p>If you need to use a function from a R package in the parallel cluster, you need to export the package in the cluster as well. This can be done by the argument “.package” in the foreach function or by using the <code>ClusterEvalQ</code> function.</p>
 <p>Let’s use the ChickWeigth dataset which contains the variables weigth, Time, Chick and Diet. We want to compute the growth of each chick (i.e., weigth ~ Time). We can use the dplyr package to subset each chick from the dataset and then apply the <code>lm</code> function to each one separately. Here we want the coefficients of the linear model as a result and we will combine them by rows by using “.combine = rbind”.</p>
 <pre class="r"><code>data(&quot;ChickWeight&quot;)
-clusterEvalQ(cl,library(&quot;dplyr&quot;))</code></pre>
-<pre><code>## [[1]]
-## [1] &quot;dplyr&quot;     &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot; 
-## [7] &quot;methods&quot;   &quot;base&quot;     
-## 
-## [[2]]
-## [1] &quot;dplyr&quot;     &quot;stats&quot;     &quot;graphics&quot;  &quot;grDevices&quot; &quot;utils&quot;     &quot;datasets&quot; 
-## [7] &quot;methods&quot;   &quot;base&quot;</code></pre>
-<pre class="r"><code>clusterExport(cl,&quot;ChickWeight&quot;)
-
-length(unique(ChickWeight$Chick))</code></pre>
+clusterEvalQ(cl,library(&quot;dplyr&quot;))
+clusterExport(cl,&quot;ChickWeight&quot;)</code></pre>
+<pre class="r"><code>length(unique(ChickWeight$Chick))</code></pre>
 <pre><code>## [1] 50</code></pre>
 <pre class="r"><code>#there are 50 unique chicks in this data
 
-Growth_coeff&lt;- foreach(i = 1:50, .combine = rbind, .packages = &quot;dplyr&quot;) %dopar% {
+Growth_coeff&lt;- foreach(i = 1:50, .combine = rbind) %dopar% {
   temp_data &lt;- ChickWeight %&gt;% filter(Chick == i)
   Growth = lm(weight ~ Time, data = temp_data)
   coefficients(Growth)
@@ -538,7 +530,7 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   32.68    0.19   33.66</code></pre>
+##   42.68    0.47   47.57</code></pre>
 <p>And now in parallel mode (%dopar%)</p>
 <pre class="r"><code>trials &lt;- 300
 system.time({
@@ -554,7 +546,7 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.27    0.08   35.45</code></pre>
+##    0.26    0.07   37.14</code></pre>
 </div>
 </div>
 
