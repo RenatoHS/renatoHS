@@ -1,0 +1,17 @@
+body{ /* Normal  */
+    font-size: 14px;
+}
+h1 { /* Header 1 */
+    font-size: 26px;
+  color: DarkGreen;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+  color: DarkGreen;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 12px;
+}

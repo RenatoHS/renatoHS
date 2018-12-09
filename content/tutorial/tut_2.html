@@ -4,40 +4,22 @@ author: "Renato Henriques-Silva"
 date: "November 20, 2018"
 output: 
   html_document:
+    css: my_css_style.css
     toc: TRUE
     number_sections: TRUE
 ---
 
 
 
-<style type="text/css">
-body{ /* Normal  */
-      font-size: 14px;
-  }
-h1 { /* Header 1 */
-  font-size: 26px;
-  color: DarkGreen;
-}
-h2 { /* Header 2 */
-    font-size: 22px;
-  color: DarkGreen;
-}
-code.r{ /* Code block */
-    font-size: 12px;
-}
-pre { /* Code block - determines code spacing between lines */
-    font-size: 12px;
-}
-</style>
-<div id="why-use-parallel-processing" class="section level1">
-<h1>Why use parallel processing?</h1>
+<div id="why-use-parallel-processing" class="section level2">
+<h2>Why use parallel processing?</h2>
 <p>The goal of this series of tutorials is to teach ecologists on how to use parallel computing to perform null models. I thus assume that you already know what a null model is. :)</p>
 <p>Otherwise, there is an excellent book on the subject (Gotelli and Graves, 1996) that is freely available to download <a href="https://www.uvm.edu/~ngotelli/nullmodelspage.html">here</a>.</p>
 <p>Why use parallel processing? The simple answer is time. If something takes less time done through parallel processing, why not do it? Computers nowadays have multi core processors with sufficient amount of memory available to run parallel processing. Instead of waiting a long time for a task to complete, one can divide the taks to run in multiple cores and thus obtain outputs much faster.</p>
 <p>Before deciding to parallelize your code, remember that there is a trade-off between performance and simplicity. It takes some time to set up the parallel cluster so if your code already runs fast it is not worth it. If your code repeats a similar task over and over (e.g., bootstraping) then it is recommended to parallize to improve performance. Hence, parallel computing is ideal for null models.</p>
 <p>While there are many good tutorials on parallel computing in R out there, I think it is better to provide a small introduction on how to set up a parallel cluster and how to start coding in parallel before jumping on the null models.</p>
-<div id="r-packages" class="section level2">
-<h2>R packages</h2>
+<div id="r-packages" class="section level3">
+<h3>R packages</h3>
 <p>There are many packages to run parallel processing in R. Here are a few examples:</p>
 <ul>
 <li>parallel</li>
@@ -56,8 +38,8 @@ pre { /* Code block - determines code spacing between lines */
 <p>This will create a <em>Parallel Socket Cluster</em> (PSOCK). This type of cluster only starts with the base packages and thus you need to export additional variables, functions and packages to the cluster (see further below) if you need them in your parallelized code.</p>
 <p>You can also create a FORK cluster, which has better capabilities to manage memory and already contain all the variables from the local environment (i.e., no need for export) since all the cores share the same memory. For this, use: <code>cl &lt;- makeCluster(2, type = 'FORK')</code> Note, however, that Windows does not support FORK clusters.</p>
 </div>
-<div id="foreach-loops" class="section level2">
-<h2>foreach loops</h2>
+<div id="foreach-loops" class="section level3">
+<h3>foreach loops</h3>
 <p>An intuitive way to perform a parallel process is to use the foreach function which looks like a for loop but operates as a lapply() function. As a first example we will perform the foreach function in sequential mode by using %do%</p>
 <pre class="r"><code>foreach(i = 1:6) %do% {
   sqrt(i)
@@ -141,6 +123,9 @@ head(Growth_coeff)</code></pre>
 ## result.4    32.86568  6.088640
 ## result.5    16.89563 10.055362
 ## result.6    44.12343  6.378006</code></pre>
+</div>
+<div id="comparing-execution-time" class="section level3">
+<h3>Comparing execution time</h3>
 <p>In the example above the <code>combine = .rbind</code> argument combined <code>coefficients(Growth)</code> into the <code>Growth_coeff</code> output.</p>
 <p>Finally, let’s see how much time do we save by using the parallelized code. In this case we will repeat the above code 300 times and use the <code>system.time</code> function to determine how much times it takes to run.</p>
 <p>First in sequential mode (%do%)</p>
@@ -158,7 +143,7 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   43.85    0.31   48.85</code></pre>
+##   36.04    0.15   37.88</code></pre>
 <p>And now in parallel mode (%dopar%)</p>
 <pre class="r"><code>trials &lt;- 300
 system.time({
@@ -174,6 +159,6 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.29    0.03   27.86</code></pre>
+##    0.24    0.05   28.17</code></pre>
 </div>
 </div>
