@@ -1,12 +1,10 @@
 ---
-title: "Introduction to Parallel Computing"
-author: "Renato Henriques-Silva"
-date: "November 20, 2018"
-output: 
+title: "Ozone"
+author: "Anonymous"
+date: "January 1, 2015"
+output:
   html_document:
     css: my_css_style.css
-    toc: TRUE
-    number_sections: TRUE
 ---
 
 
@@ -143,7 +141,7 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   36.04    0.15   37.88</code></pre>
+##   36.97    0.19   39.39</code></pre>
 <p>And now in parallel mode (%dopar%)</p>
 <pre class="r"><code>trials &lt;- 300
 system.time({
@@ -159,6 +157,6 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.24    0.05   28.17</code></pre>
+##    0.23    0.09   25.57</code></pre>
 </div>
 </div>

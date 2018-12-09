@@ -1,12 +1,10 @@
 ---
-title: "Introduction to Parallel Computing"
-author: "Renato Henriques-Silva"
-date: "November 20, 2018"
-output: 
+title: "Ozone"
+author: "Anonymous"
+date: "January 1, 2015"
+output:
   html_document:
     css: my_css_style.css
-    toc: TRUE
-    number_sections: TRUE
 ---
 
 ## Why use parallel processing?

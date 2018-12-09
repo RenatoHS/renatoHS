@@ -512,7 +512,7 @@ git submodule update --init --recursive
     </item>
     
     <item>
-      <title>Introduction to Parallel Computing</title>
+      <title>Ozone</title>
       <link>/tutorial/tut_2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -652,7 +652,7 @@ system.time({
   }
 })&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    user  system elapsed 
-##   36.04    0.15   37.88&lt;/code&gt;&lt;/pre&gt;
+##   36.97    0.19   39.39&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;And now in parallel mode (%dopar%)&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;trials &amp;lt;- 300
 system.time({
@@ -668,7 +668,7 @@ system.time({
   }
 })&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    user  system elapsed 
-##    0.24    0.05   28.17&lt;/code&gt;&lt;/pre&gt;
+##    0.23    0.09   25.57&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

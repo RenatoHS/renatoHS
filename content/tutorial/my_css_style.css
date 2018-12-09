@@ -1,17 +1,14 @@
-body{
-    font-size: 14px;
+h1{
+  color: white;
+  padding: 10px;
+  background-color: #3399ff
 }
-h1 {
-    font-size: 26px;
-  color: DarkGreen;
+
+ul {
+  list-style-type: square;
 }
-h2 {
-    font-size: 22px;
-  color: DarkGreen;
-}
-r{
-    font-size: 12px;
-}
-pre {
-    font-size: 12px;
+
+.MathJax_Display {
+  padding: 0.5em;
+  background-color: #eaeff3
 }
