@@ -25,6 +25,7 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Introduction to Parallel Computing},
+            pdfauthor={Renato Henriques-Silva},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -116,15 +117,23 @@
   \title{Introduction to Parallel Computing}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{}
-    \preauthor{}\postauthor{}
+    \author{Renato Henriques-Silva}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{Nov 20, 2018}
+    \date{November 20, 2018}
 
 
 \begin{document}
 \maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\subsection{Why use parallel
+processing?}\label{why-use-parallel-processing}
 
 The goal of this series of tutorials is to teach ecologists on how to
 use parallel computing to perform null models. I thus assume that you
@@ -153,7 +162,7 @@ there, I think it is better to provide a small introduction on how to
 set up a parallel cluster and how to start coding in parallel before
 jumping on the null models.
 
-\section{R packages}\label{r-packages}
+\subsubsection{R packages}\label{r-packages}
 
 There are many packages to run parallel processing in R. Here are a few
 examples:
@@ -218,7 +227,7 @@ same memory. For this, use:
 \texttt{cl\ \textless{}-\ makeCluster(2,\ type\ =\ \textquotesingle{}FORK\textquotesingle{})}
 Note, however, that Windows does not support FORK clusters.
 
-\section{foreach loops}\label{foreach-loops}
+\subsubsection{foreach loops}\label{foreach-loops}
 
 An intuitive way to perform a parallel process is to use the foreach
 function which looks like a for loop but operates as a lapply()
@@ -349,23 +358,12 @@ rbind''.
 \begin{Highlighting}[]
 \KeywordTok{data}\NormalTok{(}\StringTok{"ChickWeight"}\NormalTok{)}
 \KeywordTok{clusterEvalQ}\NormalTok{(cl,}\KeywordTok{library}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{))}
+\KeywordTok{clusterExport}\NormalTok{(cl,}\StringTok{"ChickWeight"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## [[1]]
-## [1] "dplyr"     "stats"     "graphics"  "grDevices" "utils"     "datasets" 
-## [7] "methods"   "base"     
-## 
-## [[2]]
-## [1] "dplyr"     "stats"     "graphics"  "grDevices" "utils"     "datasets" 
-## [7] "methods"   "base"
-\end{verbatim}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{clusterExport}\NormalTok{(cl,}\StringTok{"ChickWeight"}\NormalTok{)}
-
 \KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(ChickWeight}\OperatorTok{$}\NormalTok{Chick))}
 \end{Highlighting}
 \end{Shaded}
@@ -378,7 +376,7 @@ rbind''.
 \begin{Highlighting}[]
 \CommentTok{#there are 50 unique chicks in this data}
 
-\NormalTok{Growth_coeff<-}\StringTok{ }\KeywordTok{foreach}\NormalTok{(}\DataTypeTok{i =} \DecValTok{1}\OperatorTok{:}\DecValTok{50}\NormalTok{, }\DataTypeTok{.combine =}\NormalTok{ rbind, }\DataTypeTok{.packages =} \StringTok{"dplyr"}\NormalTok{) }\OperatorTok{%dopar%}\StringTok{ }\NormalTok{\{}
+\NormalTok{Growth_coeff<-}\StringTok{ }\KeywordTok{foreach}\NormalTok{(}\DataTypeTok{i =} \DecValTok{1}\OperatorTok{:}\DecValTok{50}\NormalTok{, }\DataTypeTok{.combine =}\NormalTok{ rbind) }\OperatorTok{%dopar%}\StringTok{ }\NormalTok{\{}
 \NormalTok{  temp_data <-}\StringTok{ }\NormalTok{ChickWeight }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Chick }\OperatorTok{==}\StringTok{ }\NormalTok{i)}
 \NormalTok{  Growth =}\StringTok{ }\KeywordTok{lm}\NormalTok{(weight }\OperatorTok{~}\StringTok{ }\NormalTok{Time, }\DataTypeTok{data =}\NormalTok{ temp_data)}
   \KeywordTok{coefficients}\NormalTok{(Growth)}
@@ -398,11 +396,13 @@ rbind''.
 ## result.6    44.12343  6.378006
 \end{verbatim}
 
+\subsubsection{Comparing execution time}\label{comparing-execution-time}
+
 In the example above the \texttt{combine\ =\ .rbind} argument combined
 \texttt{coefficients(Growth)} into the \texttt{Growth\_coeff} output.
 
 Finally, let's see how much time do we save by using the parallelized
-code. In this case we will repeat the above code 100 times and use the
+code. In this case we will repeat the above code 300 times and use the
 \texttt{system.time} function to determine how much times it takes to
 run.
 
@@ -410,7 +410,7 @@ First in sequential mode (\%do\%)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{trials <-}\StringTok{ }\DecValTok{100}
+\NormalTok{trials <-}\StringTok{ }\DecValTok{300}
 \KeywordTok{system.time}\NormalTok{(\{}
 \NormalTok{  Growth_coeff <-}\StringTok{ }\KeywordTok{foreach}\NormalTok{(}\KeywordTok{icount}\NormalTok{(trials), }\DataTypeTok{.combine=}\NormalTok{rbind, }\DataTypeTok{.packages =} \StringTok{"dplyr"}\NormalTok{) }\OperatorTok{%do%}\StringTok{ }\NormalTok{\{}
     
@@ -428,14 +428,14 @@ First in sequential mode (\%do\%)
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    9.75    0.14    9.90
+##   38.62    0.28   41.03
 \end{verbatim}
 
 And now in parallel mode (\%dopar\%)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{trials <-}\StringTok{ }\DecValTok{100}
+\NormalTok{trials <-}\StringTok{ }\DecValTok{300}
 \KeywordTok{system.time}\NormalTok{(\{}
 \NormalTok{  Growth_coeff <-}\StringTok{ }\KeywordTok{foreach}\NormalTok{(}\KeywordTok{icount}\NormalTok{(trials), }\DataTypeTok{.combine=}\NormalTok{rbind, }\DataTypeTok{.packages =} \StringTok{"dplyr"}\NormalTok{) }\OperatorTok{%dopar%}\StringTok{ }\NormalTok{\{}
     
@@ -453,8 +453,17 @@ And now in parallel mode (\%dopar\%)
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.07    1.77    8.39
+##    0.22    0.06   25.78
 \end{verbatim}
+
+Make sure to \textbf{ALWAYS} close your cluster after finishing the
+parallel processing
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{stopCluster}\NormalTok{(cl)}
+\end{Highlighting}
+\end{Shaded}
 
 
 \end{document}
