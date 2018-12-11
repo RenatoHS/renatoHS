@@ -19,10 +19,10 @@ weight = 3
 # Call to action button (optional).
 #   Activate the button by specifying a URL and button label below.
 #   Deactivate by commenting out parameters, prefixing lines with `#`.
-# [cta]
-#   url = []
-#   label = []
-# +++
+[cta]
+  url = []
+  label = []
++++
 # <div style="margin-top: -0.5rem;">
 #   <a id="academic-release" href="https://sourcethemes.com/academic/updates" data-repo="gcushen/hugo-academic">
 #   Latest release <!-- V -->
