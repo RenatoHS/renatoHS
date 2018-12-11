@@ -62,7 +62,7 @@ enableGitInfo = false
   avatar = "renato.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
 
   # Details for the Contact Widget
-  email = "renatohenriques@gmail.com"
+  email = "renatohenriques(at)gmail(dot)com"
   address = "3275 Route de Cézanne CS 40061 13182 Aix-en-Provence Cedex 5"
   phone = "+33 4 42 66 79 42"
   keybase = ""  # Your keybase.io username.
